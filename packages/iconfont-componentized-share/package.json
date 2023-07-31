@@ -1,5 +1,5 @@
 {
-  "name": "iconfont-gen-react",
+  "name": "@axetroy/iconfont-componentized-share",
   "version": "1.0.0",
   "main": "dist/index.js",
   "license": "MIT",
@@ -19,6 +19,6 @@
   },
   "dependencies": {
     "camelcase": "^6.0.0",
-    "iconfont-parser": "1.0.0"
+    "@axetroy/iconfont-componentized-parser": "1.0.0"
   }
 }

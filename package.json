@@ -10,7 +10,8 @@
         "packages/*"
     ],
     "scripts": {
-        "build": "yarn workspaces build"
+        "build": "yarn workspaces run build",
+        "test": "yarn workspaces run test"
     },
     "devDependencies": {
         "@types/jest": "^29.5.3",
