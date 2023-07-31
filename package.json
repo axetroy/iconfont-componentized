@@ -1,0 +1,19 @@
+{
+    "name": "iconfont-componentized",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:axetroy/iconfont-componentized.git",
+    "author": "Axetroy <axetroy.dev@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "yarn workspaces build"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.3",
+        "@types/node": "^20.4.5"
+    }
+}
