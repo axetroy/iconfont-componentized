@@ -24,6 +24,8 @@ function trimTextNode(node: SvgNode) {
  * @returns
  */
 export async function parseFromURL(url: string): Promise<Icon[]> {
+    url = /^\/\//.test(url) ? "https:" + url : url;
+
     const resp = await axios(url);
 
     const matcher = /<svg>(.+?)<\/svg>/.exec(resp.data);
