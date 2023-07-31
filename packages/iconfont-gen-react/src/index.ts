@@ -36,6 +36,12 @@ import React from 'react';
 
 export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
 
+${components
+    .map((v) => {
+        return `export { ${v.name} } from './${v.name}'`;
+    })
+    .join("\n")}
+
 export declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName }>;
 `;
 }
@@ -136,6 +142,6 @@ ${componentName}.displayName = '${componentName}';
         id: icon.id,
         name: componentName,
         content: componentStr,
-        declaration: `${header}\n\nimport React from 'react';\n\nexport declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement>>;`,
+        declaration: `${header}\n\nimport React from 'react';\n\nexport declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement>>;\n`,
     };
 }

@@ -8,8 +8,6 @@ describe("generate react", () => {
 
         const components = generateComponents(nodes);
 
-        console.log(JSON.stringify(components, null, 4))
-
         expect(components).toEqual(require("./index.spec.1.json"));
     });
 
