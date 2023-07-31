@@ -38,7 +38,7 @@ export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
 
 ${components
     .map((v) => {
-        return `export { ${v.name} } from './${v.name}'`;
+        return `export { ${v.name} } from './${v.name}';`;
     })
     .join("\n")}
 
