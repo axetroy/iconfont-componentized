@@ -68,7 +68,6 @@ function generateComponent(icon: Icon): Component {
     const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
     const svgStr = generateSvg(icon.node, 4, {
-        xmlns: "http://www.w3.org/2000/svg",
         "v-bind": "$attrs",
         "v-on": "$listeners",
     });

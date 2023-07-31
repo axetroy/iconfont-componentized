@@ -3,32 +3,22 @@ import { SvgNode } from "@axetroy/iconfont-componentized-parser";
 export function generateSvg(node: SvgNode, indent: number, props: Record<string, string>): string {
     const indentSpace = " ".repeat(indent);
 
-    let attrs = Object.keys(node.attributes || [])
+    const attributes = { ...node.attributes, ...(node.name === "svg" ? { xmlns: "http://www.w3.org/2000/svg", ...props } : {}) };
+
+    let attrs = Object.keys(attributes || [])
         .map((key) => {
-            if (key === "id") {
+            if (node.name === "svg" && key === "id") {
                 return;
             }
 
-            return `${key}="${node.attributes[key]}"`;
+            if (key === "...") {
+                return `{ ...${attributes[key]} }`;
+            }
+
+            return `${key}="${attributes[key]}"`;
         })
         .filter((v) => v)
         .join(" ");
-
-    if (node.name === "svg") {
-        const rootAttrs = Object.keys(props)
-            .map((key) => {
-                if (key === "...") {
-                    return `{ ...${props[key]} }`;
-                }
-
-                return `${key}="${props[key]}"`;
-            })
-            .join(" ");
-
-        if (rootAttrs) {
-            attrs += " " + rootAttrs;
-        }
-    }
 
     const startTag = node.children.length ? `${indentSpace}<${node.name} ${attrs}>` : `${indentSpace}<${node.name} ${attrs} />`;
 
