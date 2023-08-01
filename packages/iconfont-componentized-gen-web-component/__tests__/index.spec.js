@@ -14,6 +14,6 @@ describe("generate web component", () => {
     it("generate web component 2", async () => {
         const nodes = await parseFromURL("https://at.alicdn.com/t/font_caopq7l9o8t1emi.js");
 
-        generate(nodes, path.join(__dirname, 'output.spec.1'));
+        generate(nodes, path.join(__dirname, "output.spec.1"));
     });
 });

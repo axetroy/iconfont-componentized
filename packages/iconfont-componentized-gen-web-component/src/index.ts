@@ -66,7 +66,7 @@ ${svgStr}
     }
 }
 
-customElements.define('${decamelize(componentName, { separator: '-' })}', ${componentName});
+customElements.define('${decamelize(componentName, { separator: "-" })}', ${componentName});
 `;
 
     return {

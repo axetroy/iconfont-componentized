@@ -11,10 +11,12 @@
     ],
     "scripts": {
         "build": "yarn workspaces run build",
-        "test": "yarn workspaces run test"
+        "test": "yarn workspaces run test",
+        "format": "prettier **/*.{js,jsx,ts,tsx,json} --write"
     },
     "devDependencies": {
         "@types/jest": "^29.5.3",
-        "@types/node": "^20.4.5"
+        "@types/node": "^20.4.5",
+        "prettier": "^3.0.0"
     }
 }

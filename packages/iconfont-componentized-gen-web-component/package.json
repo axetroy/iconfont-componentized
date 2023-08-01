@@ -1,26 +1,26 @@
 {
-  "name": "@axetroy/iconfont-componentized-gen-web-component",
-  "version": "1.0.0",
-  "main": "dist/index.js",
-  "license": "MIT",
-  "scripts": {
-    "test": "jest",
-    "test:ci": "jest --ci --silent --coverage false",
-    "dev": "tsc -w",
-    "build": "tsc"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.22.9",
-    "babel-jest": "^29.6.2",
-    "jest": "^29.6.2",
-    "jest-cli": "^29.6.2",
-    "ts-jest": "^29.1.1",
-    "typescript": "^5.1.6"
-  },
-  "dependencies": {
-    "@axetroy/iconfont-componentized-parser": "1.0.0",
-    "@axetroy/iconfont-componentized-share": "1.0.0",
-    "camelcase": "^6.0.0",
-    "decamelize": "^5.0.0"
-  }
+    "name": "@axetroy/iconfont-componentized-gen-web-component",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "license": "MIT",
+    "scripts": {
+        "test": "jest",
+        "test:ci": "jest --ci --silent --coverage false",
+        "dev": "tsc -w",
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "@babel/preset-env": "^7.22.9",
+        "babel-jest": "^29.6.2",
+        "jest": "^29.6.2",
+        "jest-cli": "^29.6.2",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.1.6"
+    },
+    "dependencies": {
+        "@axetroy/iconfont-componentized-parser": "1.0.0",
+        "@axetroy/iconfont-componentized-share": "1.0.0",
+        "camelcase": "^6.0.0",
+        "decamelize": "^5.0.0"
+    }
 }
