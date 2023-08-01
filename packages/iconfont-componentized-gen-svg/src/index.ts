@@ -1,35 +1,45 @@
 import { Icon } from "@axetroy/iconfont-componentized-parser";
-import { generateSvg } from "@axetroy/iconfont-componentized-share";
-import fs from "fs";
-import path from "path";
+import { generateSvg, ComponentGenerator, writeComponentsToDisk, Component } from "@axetroy/iconfont-componentized-share";
+import camelcase from "camelcase";
 
-export interface Component {
-    id: string;
-    content: string;
-}
+const header = `// generate by iconfont-componentized`;
 
-export function generateComponents(icons: Icon[]) {
-    return icons.map((c) => generateComponent(c));
-}
+export default class SVGComponentGenerator implements ComponentGenerator {
+    generate(icon: Icon): Component {
+        const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
-export function generate(icons: Icon[], outputDir: string) {
-    const components = generateComponents(icons);
-
-    // generate component file
-    for (const component of components) {
-        fs.writeFileSync(path.join(outputDir, component.id + ".svg"), component.content);
-    }
-}
-
-function generateComponent(icon: Icon): Component {
-    const svgHeader = `<?xml version="1.0" standalone="no"?>
+        const svgHeader = `<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 `;
 
-    const svgStr = svgHeader + generateSvg(icon.node, 0, {});
+        const svgStr = svgHeader + generateSvg(icon.node, 0, {});
 
-    return {
-        id: icon.id,
-        content: svgStr,
-    };
+        const componentDeclaration = `${header}
+
+declare const ${componentName}: string;
+
+export default ${componentName};
+`;
+
+        return {
+            id: icon.id,
+            componentName: componentName,
+            files: [
+                {
+                    filepath: componentName + ".svg",
+                    content: svgStr,
+                },
+                {
+                    filepath: componentName + ".d.ts",
+                    content: componentDeclaration,
+                },
+            ],
+        };
+    }
+    generates(icons: Icon[]): Component[] {
+        return icons.map((v) => this.generate(v));
+    }
+    write(components: Component[], outputDir: string): void {
+        writeComponentsToDisk(components, outputDir);
+    }
 }

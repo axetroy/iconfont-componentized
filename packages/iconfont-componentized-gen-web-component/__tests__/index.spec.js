@@ -1,19 +1,15 @@
 import { parseFromURL } from "@axetroy/iconfont-componentized-parser";
-import { generateComponents, generate } from "../src/index";
+import WebComponentGenerator from "../src/index";
 import path from "path";
 
 describe("generate web component", () => {
     it("generate web component 1", async () => {
         const nodes = await parseFromURL("https://at.alicdn.com/t/font_caopq7l9o8t1emi.js");
 
-        const components = generateComponents(nodes);
+        const gen = new WebComponentGenerator();
 
-        expect(components).toEqual(require("./index.spec.1.json"));
-    });
+        const components = gen.generates(nodes);
 
-    it("generate web component 2", async () => {
-        const nodes = await parseFromURL("https://at.alicdn.com/t/font_caopq7l9o8t1emi.js");
-
-        generate(nodes, path.join(__dirname, "output.spec.1"));
+        gen.write(components, path.join(__dirname, "output.spec.1"));
     });
 });

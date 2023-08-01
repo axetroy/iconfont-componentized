@@ -1,78 +1,19 @@
 import { Icon } from "@axetroy/iconfont-componentized-parser";
-import { generateSvg } from "@axetroy/iconfont-componentized-share";
+import { generateSvg, ComponentGenerator, Component, writeComponentsToDisk } from "@axetroy/iconfont-componentized-share";
 import camelcase from "camelcase";
-import fs from "fs";
-import path from "path";
 
-const header = `// generate by iconfont-gen-react`;
+const header = `// generate by iconfont-componentized`;
 
-export interface Component {
-    id: string;
-    name: string;
-    content: string;
-}
+export default class VueComponentGenerator implements ComponentGenerator {
+    generate(icon: Icon): Component {
+        const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
-export function generateComponents(icons: Icon[]) {
-    return icons.map((c) => generateComponent(c));
-}
+        const svgStr = generateSvg(icon.node, 4, {
+            "v-bind": "$attrs",
+            "v-on": "$listeners",
+        });
 
-export function generate(icons: Icon[], outputDir: string) {
-    const components = generateComponents(icons);
-
-    // generate component file
-    for (const component of components) {
-        fs.writeFileSync(path.join(outputDir, component.name + ".vue"), component.content);
-    }
-
-    fs.writeFileSync(path.join(outputDir, "index.vue"), generateIndexComponent(components));
-}
-
-function generateIndexComponent(components: Component[]) {
-    return `<template>
-    <!-- ${header} -->
-${components
-    .map((component, index) => {
-        const indentSpace = " ".repeat(4);
-        return `${indentSpace}<${component.name} ${index === 0 ? "v-if" : "v-else-if"}="name === '${component.id}'" v-bind="$attrs" v-on="$listeners" />`;
-    })
-    .join("\n")}
-    <div v-else style="display: none" v-bind="$attrs" v-on="$listeners"></div>
-</template>
-
-<script>
-${components
-    .map((v) => {
-        return `import ${v.name} from './${v.name}.vue'`;
-    })
-    .join("\n")}
-
-export default {
-    name: "icon-font",
-    components: {
-${components
-    .map((v) => {
-        const indentSpace = " ".repeat(8);
-        return `${indentSpace}${v.name}: ${v.name},`;
-    })
-    .join("\n")}
-    },
-    props: {
-        name: String
-    }
-}
-</script>
-`;
-}
-
-function generateComponent(icon: Icon): Component {
-    const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
-
-    const svgStr = generateSvg(icon.node, 4, {
-        "v-bind": "$attrs",
-        "v-on": "$listeners",
-    });
-
-    const componentStr = `<template>
+        const componentContent = `<template>
     <!-- ${header} -->
 ${svgStr}
 </template>
@@ -84,9 +25,113 @@ export default {
 </script>
 `;
 
-    return {
-        id: icon.id,
-        name: componentName,
-        content: componentStr,
-    };
+        const componentDeclaration = `${header}
+
+import { DefineComponent } from 'vue';
+
+type SvgProps = JSX.IntrinsicElements['svg'];
+
+export interface ${componentName}Props extends SvgProps {
+}
+
+declare const ${componentName}: DefineComponent<${componentName}Props>;
+
+export default ${componentName};
+`;
+
+        return {
+            id: icon.id,
+            componentName: componentName,
+            files: [
+                {
+                    filepath: `${componentName}.vue`,
+                    content: componentContent,
+                },
+                {
+                    filepath: `${componentName}.d.ts`,
+                    content: componentDeclaration,
+                },
+            ],
+        };
+    }
+    generates(icons: Icon[]): Component[] {
+        const components = icons.map((v) => this.generate(v));
+
+        components.push({
+            id: "index",
+            componentName: "index",
+            files: [
+                {
+                    filepath: "index.vue",
+                    content: generateIndexComponent(components),
+                },
+                {
+                    filepath: "index.d.ts",
+                    content: generateIndexComponentDeclaration(components),
+                },
+            ],
+        });
+
+        return components;
+    }
+    write(components: Component[], outputDir: string): void {
+        writeComponentsToDisk(components, outputDir);
+    }
+}
+
+function generateIndexComponent(components: Component[]) {
+    return `<template>
+    <!-- ${header} -->
+${components
+    .map((component, index) => {
+        const indentSpace = " ".repeat(4);
+        return `${indentSpace}<${component.componentName} ${index === 0 ? "v-if" : "v-else-if"}="name === '${
+            component.id
+        }'" v-bind="$attrs" v-on="$listeners" />`;
+    })
+    .join("\n")}
+    <div v-else style="display: none" v-bind="$attrs" v-on="$listeners"></div>
+</template>
+
+<script>
+${components
+    .map((v) => {
+        return `import ${v.componentName} from './${v.componentName}.vue'`;
+    })
+    .join("\n")}
+
+export default {
+    name: "icon-font",
+    components: {
+${components
+    .map((v) => {
+        const indentSpace = " ".repeat(8);
+        return `${indentSpace}${v.componentName}: ${v.componentName},`;
+    })
+    .join("\n")}
+    },
+    props: {
+        name: String
+    }
+}
+</script>
+`;
+}
+
+function generateIndexComponentDeclaration(components: Component[]) {
+    return `${header}
+import { DefineComponent } from "vue";
+
+type SvgProps = JSX.IntrinsicElements['svg'];
+
+export type IconNames = ${components.map((v) => `"${v.id}"`).join(" | ")}
+
+export interface IconFontProps extends SvgProps {
+    name: IconNames
+}
+
+declare const IconFont: DefineComponent<IconFontProps>;
+
+export default IconFont;
+`;
 }

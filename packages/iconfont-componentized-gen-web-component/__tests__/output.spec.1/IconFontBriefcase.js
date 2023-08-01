@@ -1,4 +1,4 @@
-// generate by iconfont-gen-react
+// generate by iconfont-componentized
 
 export default class IconFontBriefcase extends HTMLElement {
     constructor () {

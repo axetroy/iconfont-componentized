@@ -1,33 +1,76 @@
 import { Icon } from "@axetroy/iconfont-componentized-parser";
-import { generateSvg } from "@axetroy/iconfont-componentized-share";
+import { generateSvg, ComponentGenerator, Component, writeComponentsToDisk } from "@axetroy/iconfont-componentized-share";
 import camelcase from "camelcase";
-import fs from "fs";
-import path from "path";
 
-const header = `// generate by iconfont-gen-react`;
+const header = `// generate by iconfont-componentized`;
 
-export interface Component {
-    id: string;
-    name: string;
-    content: string;
-    declaration: string;
+export default class ReactComponentGenerator implements ComponentGenerator {
+    generate(icon: Icon): Component {
+        const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
+
+        const svgStr = generateSvg(icon.node, 8, {
+            "...": "props",
+        });
+
+        const componentContent = `import React from 'react';
+
+export default function ${componentName} (props) {
+    return (
+${svgStr}
+    )
 }
 
-export function generateComponents(icons: Icon[]) {
-    return icons.map((c) => generateComponent(c));
-}
+${componentName}.displayName = '${componentName}';
+`;
 
-export function generate(icons: Icon[], outputDir: string) {
-    const components = generateComponents(icons);
+        const componentDeclaration = `${header}
 
-    // generate component file
-    for (const component of components) {
-        fs.writeFileSync(path.join(outputDir, component.name + ".jsx"), component.content);
-        fs.writeFileSync(path.join(outputDir, component.name + ".d.ts"), component.declaration);
+import React from "react";
+
+declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement>>;
+
+export default ${componentName};
+`;
+
+        return {
+            id: icon.id,
+            componentName: componentName,
+            files: [
+                {
+                    filepath: componentName + ".jsx",
+                    content: componentContent,
+                },
+                {
+                    filepath: componentName + ".d.ts",
+                    content: componentDeclaration,
+                },
+            ],
+        };
     }
+    generates(icons: Icon[]): Component[] {
+        const components = icons.map((v) => this.generate(v));
 
-    fs.writeFileSync(path.join(outputDir, "index.jsx"), generateIndexComponent(components));
-    fs.writeFileSync(path.join(outputDir, "index.d.ts"), generateIndexComponentDeclaration(components));
+        // generate index file
+        components.push({
+            id: "index",
+            componentName: "index",
+            files: [
+                {
+                    filepath: "index.jsx",
+                    content: generateIndexComponent(components),
+                },
+                {
+                    filepath: "index.d.ts",
+                    content: generateIndexComponentDeclaration(components),
+                },
+            ],
+        });
+
+        return components;
+    }
+    write(components: Component[], outputDir: string): void {
+        writeComponentsToDisk(components, outputDir);
+    }
 }
 
 function generateIndexComponentDeclaration(components: Component[]) {
@@ -39,7 +82,7 @@ export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
 
 ${components
     .map((v) => {
-        return `export * from './${v.name}';`;
+        return `export * from './${v.componentName}';`;
     })
     .join("\n")}
 
@@ -56,13 +99,13 @@ import React from 'react';
 
 ${components
     .map((component) => {
-        return `import ${component.name} from "./${component.name}";`;
+        return `import ${component.componentName} from "./${component.componentName}";`;
     })
     .join("\n")}
 
 ${components
     .map((component) => {
-        return `export * from "./${component.name}";`;
+        return `export * from "./${component.componentName}";`;
     })
     .join("\n")}
 
@@ -72,45 +115,11 @@ ${components
     .map((v) => {
         const indentSpace = " ".repeat(8);
 
-        return `${indentSpace}case '${v.id}': return <${v.name} {...props} />;`;
+        return `${indentSpace}case '${v.id}': return <${v.componentName} {...props} />;`;
     })
     .join("\n")}
         default:
             return <i style="display: none" {...props} />
     }
 }`;
-}
-
-function generateComponent(icon: Icon): Component {
-    const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
-
-    const svgStr = generateSvg(icon.node, 8, {
-        "...": "props",
-    });
-
-    const componentStr = `${header}
-
-import React from 'react';
-
-export default function ${componentName} (props) {
-    return (
-${svgStr}
-    )
-}
-
-${componentName}.displayName = '${componentName}';
-`;
-
-    return {
-        id: icon.id,
-        name: componentName,
-        content: componentStr,
-        declaration: `${header}
-import React from "react";
-
-declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement>>;
-
-export default ${componentName};
-`,
-    };
 }

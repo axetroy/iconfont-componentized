@@ -1,5 +1,5 @@
 <template>
-    <!-- // generate by iconfont-gen-react -->
+    <!-- // generate by iconfont-componentized -->
     <IconFontJia v-if="name === 'jia'" v-bind="$attrs" v-on="$listeners" />
     <IconFontBriefcase v-else-if="name === 'briefcase'" v-bind="$attrs" v-on="$listeners" />
     <IconFontAnonymousIconfont v-else-if="name === 'anonymous-iconfont'" v-bind="$attrs" v-on="$listeners" />

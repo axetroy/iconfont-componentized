@@ -1,4 +1,4 @@
-// generate by iconfont-gen-react
+// generate by iconfont-componentized
 
 import React from 'react';
 

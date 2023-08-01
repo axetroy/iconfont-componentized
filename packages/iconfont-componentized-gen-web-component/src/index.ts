@@ -1,50 +1,18 @@
 import { Icon } from "@axetroy/iconfont-componentized-parser";
-import { generateSvg } from "@axetroy/iconfont-componentized-share";
+import { generateSvg, ComponentGenerator, Component, writeComponentsToDisk } from "@axetroy/iconfont-componentized-share";
 import camelcase from "camelcase";
-import fs from "fs";
-import path from "path";
 import decamelize from "decamelize";
 
-const header = `// generate by iconfont-gen-react`;
+const header = `// generate by iconfont-componentized`;
 
-export interface Component {
-    id: string;
-    name: string;
-    content: string;
-}
+export default class WebComponentGenerator implements ComponentGenerator {
+    generate(icon: Icon): Component {
+        const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
+        const webComponentName = decamelize(componentName, { separator: "-" });
 
-export function generateComponents(icons: Icon[]) {
-    return icons.map((c) => generateComponent(c));
-}
+        const svgStr = generateSvg(icon.node, 12, {});
 
-export function generate(icons: Icon[], outputDir: string) {
-    const components = generateComponents(icons);
-
-    // generate component file
-    for (const component of components) {
-        fs.writeFileSync(path.join(outputDir, component.name + ".js"), component.content);
-    }
-
-    fs.writeFileSync(path.join(outputDir, "index.js"), generateIndexComponent(components));
-}
-
-function generateIndexComponent(components: Component[]) {
-    return `${header}
-
-${components
-    .map((component) => {
-        return `export * from "./${component.name}";`;
-    })
-    .join("\n")}
-`;
-}
-
-function generateComponent(icon: Icon): Component {
-    const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
-
-    const svgStr = generateSvg(icon.node, 12, {});
-
-    const componentStr = `${header}
+        const componentContent = `${header}
 
 export default class ${componentName} extends HTMLElement {
     constructor () {
@@ -66,12 +34,77 @@ ${svgStr}
     }
 }
 
-customElements.define('${decamelize(componentName, { separator: "-" })}', ${componentName});
+customElements.define('${webComponentName}', ${componentName});
 `;
 
-    return {
-        id: icon.id,
-        name: componentName,
-        content: componentStr,
-    };
+        const componentDeclaration = `${header}
+
+export declare class ${componentName} extends HTMLElement {
+    constructor();
+}
+
+declare global {
+    interface HTMLElementTagNameMap {
+        '${webComponentName}': ${componentName};
+    }
+}
+`;
+
+        return {
+            id: icon.id,
+            componentName: componentName,
+            files: [
+                { filepath: componentName + ".js", content: componentContent },
+                {
+                    filepath: componentName + ".d.ts",
+                    content: componentDeclaration,
+                },
+            ],
+        };
+    }
+    generates(icons: Icon[]): Component[] {
+        const components = icons.map((v) => this.generate(v));
+
+        components.push({
+            id: "index",
+            componentName: "index",
+            files: [
+                {
+                    filepath: "index.js",
+                    content: generateIndexComponent(components),
+                },
+                {
+                    filepath: "index.d.ts",
+                    content: generateIndexDeclaration(components),
+                },
+            ],
+        });
+
+        return components;
+    }
+    write(components: Component[], outputDir: string): void {
+        writeComponentsToDisk(components, outputDir);
+    }
+}
+
+function generateIndexComponent(components: Component[]): string {
+    return `${header}
+
+${components
+    .map((component) => {
+        return `export * from "./${component.componentName}";`;
+    })
+    .join("\n")}
+`;
+}
+
+function generateIndexDeclaration(components: Component[]): string {
+    return `${header}
+
+${components
+    .map((component) => {
+        return `export * from "./${component.componentName}";`;
+    })
+    .join("\n")}
+`;
 }

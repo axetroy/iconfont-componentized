@@ -1,5 +1,7 @@
 import { SvgNode } from "@axetroy/iconfont-componentized-parser";
 
+export * from "./generator";
+
 export function generateSvg(node: SvgNode, indent: number, props: Record<string, string>): string {
     const indentSpace = " ".repeat(indent);
 

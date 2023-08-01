@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@axetroy/iconfont-componentized-parser": "1.0.0",
-        "@axetroy/iconfont-componentized-share": "1.0.0"
+        "@axetroy/iconfont-componentized-share": "1.0.0",
+        "camelcase": "^6.0.0"
     }
 }
