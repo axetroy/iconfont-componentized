@@ -12,7 +12,7 @@
     "scripts": {
         "build": "yarn workspaces run build",
         "test": "yarn workspaces run test",
-        "format": "prettier **/*.{js,jsx,ts,tsx,json} --write"
+        "format": "prettier **/*.{js,jsx,ts,json,md} --write"
     },
     "devDependencies": {
         "@types/jest": "^29.5.3",

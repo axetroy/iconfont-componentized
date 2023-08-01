@@ -29,6 +29,10 @@ if (argv["V"] || argv["version"]) {
     printVersion();
 }
 
+if (argv["h"] || argv["help"]) {
+    printHelp();
+}
+
 const url = argv[0];
 
-console.log(argv, url);
+console.log(JSON.stringify(argv), url);
