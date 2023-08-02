@@ -62,20 +62,36 @@ export default ${componentName};
     generates(icons: Icon[]): Component[] {
         const components = icons.map((v) => this.generate(v));
 
-        components.push({
-            id: "index",
-            componentName: "index",
-            files: [
-                {
-                    filepath: "index.js",
-                    content: generateIndexComponent(components),
-                },
-                {
-                    filepath: "index.d.ts",
-                    content: generateIndexComponentDeclaration(components),
-                },
-            ],
-        });
+        components.push(
+            {
+                id: "index",
+                componentName: "index",
+                files: [
+                    {
+                        filepath: "index.js",
+                        content: generateIndexComponent(components),
+                    },
+                    {
+                        filepath: "index.d.ts",
+                        content: generateIndexComponentDeclaration(components),
+                    },
+                ],
+            },
+            {
+                id: "plugin",
+                componentName: "plugin",
+                files: [
+                    {
+                        filepath: "plugin.js",
+                        content: generatePlugin(components),
+                    },
+                    {
+                        filepath: "plugin.d.ts",
+                        content: generatePluginDeclaration(components),
+                    },
+                ],
+            },
+        );
 
         return components;
     }
@@ -179,5 +195,56 @@ export interface IconFontProps extends SvgProps {
 declare const IconFont: DefineComponent<IconFontProps>;
 
 export default IconFont;
+`;
+}
+
+function generatePlugin(components: Component[]) {
+    const pluginIndentSpace = " ".repeat(8);
+
+    return `${header}
+
+${components
+    .map((v) => {
+        return `import ${v.componentName} from './${v.componentName}'`;
+    })
+    .join("\n")}
+import IconFont from './index';
+
+const IconFontPlugin = {
+    install(Vue) {
+${components
+    .map((v) => {
+        return `${pluginIndentSpace}Vue.component('${v.componentName}', ${v.componentName})`;
+    })
+    .join("\n")}
+${pluginIndentSpace}Vue.component('IconFont', IconFont);
+    }
+}
+
+export default IconFontPlugin;
+`;
+}
+
+function generatePluginDeclaration(components: Component[]) {
+    return `${header}
+import Vue from 'vue';
+import { ComponentOptions } from 'vue';
+
+declare module 'IconFontComponentsPlugin' {
+${components
+    .map((v) => {
+        const indentSpace = " ".repeat(4);
+
+        return `${indentSpace}export const ${v.componentName}: ComponentOptions<Vue>;`;
+    })
+    .join("\n")}
+    export const IconFont: ComponentOptions<Vue>;
+
+    const IconFontComponentsPlugin: {
+        install(Vue: typeof import('vue')): void;
+    };
+
+    export default IconFontComponentsPlugin;
+}
 `;
 }
