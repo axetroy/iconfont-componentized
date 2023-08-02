@@ -82,7 +82,13 @@ export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
 
 ${components
     .map((v) => {
-        return `export * from './${v.componentName}';`;
+        return `import ${v.componentName} from './${v.componentName}';`;
+    })
+    .join("\n")}
+
+${components
+    .map((v) => {
+        return `export { ${v.componentName} };`;
     })
     .join("\n")}
 
@@ -105,7 +111,7 @@ ${components
 
 ${components
     .map((component) => {
-        return `export * from "./${component.componentName}";`;
+        return `export { ${component.componentName} };`;
     })
     .join("\n")}
 

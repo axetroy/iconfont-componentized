@@ -1,5 +1,3 @@
-// generate by iconfont-componentized
-
 import React from 'react';
 
 export default function IconFontAnonymousIconfont (props) {

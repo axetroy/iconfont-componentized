@@ -4,11 +4,17 @@ import React from 'react';
 
 export type IconFontName = 'jia' | 'briefcase' | 'anonymous-iconfont' | 'jiesuan' | 'canju-yongcan';
 
-export * from './IconFontJia';
-export * from './IconFontBriefcase';
-export * from './IconFontAnonymousIconfont';
-export * from './IconFontJiesuan';
-export * from './IconFontCanjuYongcan';
+import IconFontJia from './IconFontJia';
+import IconFontBriefcase from './IconFontBriefcase';
+import IconFontAnonymousIconfont from './IconFontAnonymousIconfont';
+import IconFontJiesuan from './IconFontJiesuan';
+import IconFontCanjuYongcan from './IconFontCanjuYongcan';
+
+export { IconFontJia };
+export { IconFontBriefcase };
+export { IconFontAnonymousIconfont };
+export { IconFontJiesuan };
+export { IconFontCanjuYongcan };
 
 declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName }>;
 

@@ -8,11 +8,11 @@ import IconFontAnonymousIconfont from "./IconFontAnonymousIconfont";
 import IconFontJiesuan from "./IconFontJiesuan";
 import IconFontCanjuYongcan from "./IconFontCanjuYongcan";
 
-export * from "./IconFontJia";
-export * from "./IconFontBriefcase";
-export * from "./IconFontAnonymousIconfont";
-export * from "./IconFontJiesuan";
-export * from "./IconFontCanjuYongcan";
+export { IconFontJia };
+export { IconFontBriefcase };
+export { IconFontAnonymousIconfont };
+export { IconFontJiesuan };
+export { IconFontCanjuYongcan };
 
 export default function IconFont(props) {
     switch (props.name) {
