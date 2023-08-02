@@ -7,15 +7,18 @@
         "test": "jest",
         "test:ci": "jest --ci --silent --coverage false",
         "dev": "tsc -w",
-        "build": "tsc"
+        "build": "tsc",
+        "serve": "vite serve"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.22.9",
+        "@vitejs/plugin-vue2": "^2.2.0",
         "babel-jest": "^29.6.2",
         "jest": "^29.6.2",
         "jest-cli": "^29.6.2",
         "ts-jest": "^29.1.1",
         "typescript": "^5.1.6",
+        "vite": "^4.4.8",
         "vue": "^2.7.x"
     },
     "dependencies": {

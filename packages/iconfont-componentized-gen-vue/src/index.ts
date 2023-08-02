@@ -1,5 +1,5 @@
 import { Icon } from "@axetroy/iconfont-componentized-parser";
-import { generateSvg, ComponentGenerator, Component, writeComponentsToDisk } from "@axetroy/iconfont-componentized-share";
+import { ComponentGenerator, Component, writeComponentsToDisk, generateVueVNode } from "@axetroy/iconfont-componentized-share";
 import camelcase from "camelcase";
 
 const header = `// generate by iconfont-componentized`;
@@ -8,21 +8,26 @@ export default class VueComponentGenerator implements ComponentGenerator {
     generate(icon: Icon): Component {
         const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
-        const svgStr = generateSvg(icon.node, 4, {
-            "v-bind": "$attrs",
-            "v-on": "$listeners",
-        });
+        const vNodeString = generateVueVNode(
+            icon.node,
+            12,
+            {
+                xmlns: "http://www.w3.org/2000/svg",
+                "...": "this.$attrs",
+            },
+            "h",
+        );
 
-        const componentContent = `<template>
-    <!-- ${header} -->
-${svgStr}
-</template>
+        const componentContent = `${header}
 
-<script>
 export default {
     name: "${componentName}",
+    render(h) {
+        return (
+${vNodeString}
+        )
+    }
 }
-</script>
 `;
 
         const componentDeclaration = `${header}
@@ -44,7 +49,7 @@ export default ${componentName};
             componentName: componentName,
             files: [
                 {
-                    filepath: `${componentName}.vue`,
+                    filepath: `${componentName}.js`,
                     content: componentContent,
                 },
                 {
@@ -62,7 +67,7 @@ export default ${componentName};
             componentName: "index",
             files: [
                 {
-                    filepath: "index.vue",
+                    filepath: "index.js",
                     content: generateIndexComponent(components),
                 },
                 {
@@ -80,28 +85,22 @@ export default ${componentName};
 }
 
 function generateIndexComponent(components: Component[]) {
-    return `<template>
-    <!-- ${header} -->
-${components
-    .map((component, index) => {
-        const indentSpace = " ".repeat(4);
-        return `${indentSpace}<${component.componentName} ${index === 0 ? "v-if" : "v-else-if"}="name === '${
-            component.id
-        }'" v-bind="$attrs" v-on="$listeners" />`;
-    })
-    .join("\n")}
-    <div v-else style="display: none" v-bind="$attrs" v-on="$listeners"></div>
-</template>
+    return `${header}
 
-<script>
 ${components
     .map((v) => {
-        return `import ${v.componentName} from './${v.componentName}.vue'`;
+        return `import ${v.componentName} from './${v.componentName}'`;
+    })
+    .join("\n")}
+
+${components
+    .map((v) => {
+        return `export { ${v.componentName} };`;
     })
     .join("\n")}
 
 export default {
-    name: "icon-font",
+    name: "IconFont",
     components: {
 ${components
     .map((v) => {
@@ -111,16 +110,63 @@ ${components
     .join("\n")}
     },
     props: {
-        name: String
+        name: String,
+        required: true
+    },
+    render(h) {
+        switch (this.name) {
+${components
+    .map((v) => {
+        const indentSpace = " ".repeat(12);
+        return `${indentSpace}case "${v.id}": return ${generateVueVNode(
+            {
+                name: v.componentName,
+                type: v.componentName,
+                value: "",
+                attributes: {},
+                children: [],
+            },
+            0,
+            { "...": "this.$attrs" },
+            "h",
+        )};`;
+    })
+    .join("\n")}
+            default:
+                return ${generateVueVNode(
+                    {
+                        name: "div",
+                        type: "div",
+                        value: "",
+                        attributes: {},
+                        children: [],
+                    },
+                    0,
+                    { style: { display: "none" }, "...": "this.$attrs" },
+                    "h",
+                )};
+        }
     }
 }
-</script>
 `;
 }
 
 function generateIndexComponentDeclaration(components: Component[]) {
     return `${header}
+
 import { DefineComponent } from "vue";
+
+${components
+    .map((v) => {
+        return `import ${v.componentName} from './${v.componentName}';`;
+    })
+    .join("\n")}
+
+${components
+    .map((v) => {
+        return `export { ${v.componentName} };`;
+    })
+    .join("\n")}
 
 type SvgProps = JSX.IntrinsicElements['svg'];
 
