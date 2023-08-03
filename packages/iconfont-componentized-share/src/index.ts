@@ -36,7 +36,8 @@ export function generateVueVNode(node: SvgNode, indent: number, rootProps: Recor
 
     let attributes: Record<string, any> = { ...node.attributes, ...rootProps };
 
-    delete attributes["..."];
+    delete attributes["id"]; // remove id property
+    delete attributes["..."]; // remove spread property
 
     const properties = (() => {
         const hasCustomProperty = Object.keys(attributes).length;
