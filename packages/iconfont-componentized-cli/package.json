@@ -1,7 +1,9 @@
 {
     "name": "@axetroy/iconfont-componentized-cli",
     "version": "1.0.0",
-    "bin": "./dist/index.js",
+    "bin": {
+        "iconfont-componentized": "./dist/index.js"
+    },
     "license": "MIT",
     "scripts": {
         "test": "jest",
