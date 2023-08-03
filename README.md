@@ -1,4 +1,13 @@
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+
 ### Make IconFont Componentized
+
+IconFont Componentized is a series of tools for converting IconFont into components of various common frameworks.
+
+### Feature
+
+-   Support generate for `React`/`Vue`/`SVG`/`WebComponent` and more...
 
 #### Usage
 
@@ -21,3 +30,7 @@ npm install @axetroy/iconfont-componentized-cli -D
 ```bash
 npm run gen:iconfont
 ```
+
+### License
+
+[ANTI-996 LICENSE](LICENSE)
