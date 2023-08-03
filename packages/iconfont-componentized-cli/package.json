@@ -19,6 +19,11 @@
     },
     "dependencies": {
         "@axetroy/iconfont-componentized-parser": "1.0.0",
+        "@axetroy/iconfont-componentized-share": "1.0.0",
+        "@axetroy/iconfont-componentized-gen-react": "1.0.0",
+        "@axetroy/iconfont-componentized-gen-vue": "1.0.0",
+        "@axetroy/iconfont-componentized-gen-svg": "1.0.0",
+        "@axetroy/iconfont-componentized-gen-web-component": "1.0.0",
         "yargs": "^17.7.2"
     }
 }
