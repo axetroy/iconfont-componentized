@@ -13,7 +13,7 @@
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write",
-        "changeset:release": "changeset publish",
+        "changeset:release": "pnpm publish -r --access public",
         "changeset:version": "changeset version && pnpm install --lockfile-only",
         "prepublishOnly": "pnpm build"
     },
