@@ -48,6 +48,9 @@ importers:
       '@babel/preset-env':
         specifier: ^7.22.9
         version: 7.22.9(@babel/core@7.22.9)
+      '@types/yargs':
+        specifier: ^17.0.24
+        version: 17.0.24
       babel-jest:
         specifier: ^29.6.2
         version: 29.6.2(@babel/core@7.22.9)
