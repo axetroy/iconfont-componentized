@@ -37,7 +37,7 @@ jobs:
               with:
                   title: "chore: update versions"
                   commit: "chore: update versions"
-                  publish: pnpm changeset:publish
+                  publish: pnpm changeset:release
                   version: pnpm changeset:version
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
