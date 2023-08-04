@@ -2,7 +2,13 @@
     "name": "@axetroy/iconfont-componentized-share",
     "version": "1.0.6",
     "main": "dist/index.js",
-    "license": "MIT",
+    "license": "ANTI-996",
+    "files": [
+        "dist",
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
     "scripts": {
         "test": "jest",
         "test:ci": "jest --ci --silent --coverage false",
