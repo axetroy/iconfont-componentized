@@ -1,11 +1,14 @@
 name: Changesets
 on:
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 env:
     CI: true
     PNPM_CACHE_FOLDER: .pnpm-store
+defaults:
+    run:
+        shell: bash
 jobs:
     version:
         timeout-minutes: 15
