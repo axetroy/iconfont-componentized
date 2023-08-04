@@ -1,8 +1,8 @@
 name: Changesets
 on:
-    push:
-        branches:
-            - main
+  push:
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 env:
     CI: true
     PNPM_CACHE_FOLDER: .pnpm-store
