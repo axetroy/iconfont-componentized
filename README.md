@@ -8,7 +8,7 @@ IconFont Componentized is a series of tools for converting IconFont into compone
 
 ### Feature
 
--   Support generate for `React`/`Vue`/`SVG`/`WebComponent` and more...
+-   Support generate for `React`/`Vue`/`SVG`/`WebComponent`/`DOM` and more...
 
 #### Usage
 

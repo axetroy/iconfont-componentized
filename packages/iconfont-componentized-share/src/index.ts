@@ -2,10 +2,12 @@ import { SvgNode } from "@axetroy/iconfont-componentized-parser";
 
 export * from "./generator";
 
+const svgNameSpace = "http://www.w3.org/2000/svg";
+
 export function generateSvg(node: SvgNode, indent: number, rootProps: Record<string, any>): string {
     const indentSpace = " ".repeat(indent);
 
-    const attributes: Record<string, string> = { ...node.attributes, ...(node.name === "svg" ? { xmlns: "http://www.w3.org/2000/svg", ...rootProps } : {}) };
+    const attributes: Record<string, string> = { ...node.attributes, ...(node.name === "svg" ? { xmlns: svgNameSpace, ...rootProps } : {}) };
 
     let attrs = Object.keys(attributes || [])
         .map((key) => {
@@ -76,4 +78,49 @@ export function generateVueVNode(node: SvgNode, indent: number, rootProps: Recor
     })();
 
     return `${indentSpace}${name}("${node.name}"${properties}${children})`;
+}
+
+export function generateSvgDOM(node: SvgNode, indent: number, componentName: string): string {
+    let eleIndex = -1;
+
+    function generateTemplate(node: SvgNode, indent: number, parentVarName?: string): string {
+        eleIndex += 1;
+
+        const indentSpace = " ".repeat(indent);
+
+        const elementName = `ele${eleIndex}`;
+
+        const declare = `${indentSpace}var ${elementName} = document.createElementNS("${svgNameSpace}", "${node.name}");`;
+
+        const attributes = { ...node.attributes };
+
+        if (node.name === "svg") {
+            attributes.xmlns = svgNameSpace;
+        }
+
+        let attrs = Object.keys(attributes)
+            .filter((v) => v !== "id")
+            .map((attr) => {
+                return `${indentSpace}${elementName}.setAttribute("${attr}", "${attributes[attr]}");`;
+            })
+            .join("\n");
+
+        if (attrs) {
+            attrs = "\n" + attrs;
+        }
+
+        let children = node.children.map((child) => generateTemplate(child, indent + 4, elementName)).join("\n");
+
+        if (children) {
+            children = "\n\n" + children + "\n";
+        }
+
+        const returnStatement = indentSpace + (parentVarName ? `${parentVarName}.appendChild(${elementName});` : `return ${elementName};`);
+
+        return declare + attrs + children + "\n" + returnStatement;
+    }
+
+    return `export default function ${componentName}() {
+${generateTemplate(node, indent + 4)}
+}`;
 }
