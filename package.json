@@ -13,8 +13,9 @@
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write",
-        "changeset:release": "pnpm build && pnpm publish",
-        "changeset:version": "changeset version && pnpm install --lockfile-only"
+        "changeset:release": "changeset publish",
+        "changeset:version": "changeset version && pnpm install --lockfile-only",
+        "prepublishOnly": "pnpm build"
     },
     "devDependencies": {
         "@babel/core": "^7.22.9",
