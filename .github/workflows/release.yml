@@ -32,11 +32,13 @@ jobs:
               run: pnpm install
 
             - name: create and publish versions
+              id: changesets
               uses: changesets/action@v1
               with:
-                  version: pnpm ci:version
-                  commit: "chore: update versions"
                   title: "chore: update versions"
-                  publish: pnpm ci:publish
+                  commit: "chore: update versions"
+                  publish: pnpm changeset:publish
+                  version: pnpm changeset:version
               env:
                   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -13,8 +13,8 @@
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write",
-        "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
-        "ci:publish": "pnpm publish -r"
+        "changeset:release": "pnpm build && changeset publish -r",
+        "changeset:version": "changeset version && pnpm install --lockfile-only"
     },
     "devDependencies": {
         "@babel/core": "^7.22.9",
