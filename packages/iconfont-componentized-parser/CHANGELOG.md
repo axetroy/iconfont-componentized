@@ -1,5 +1,11 @@
 # @axetroy/iconfont-componentized-parser
 
+## 1.0.11
+
+### Patch Changes
+
+-   a8068ba: update
+
 ## 1.0.10
 
 ### Patch Changes

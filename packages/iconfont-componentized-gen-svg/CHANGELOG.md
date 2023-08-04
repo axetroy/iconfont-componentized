@@ -1,5 +1,14 @@
 # @axetroy/iconfont-componentized-gen-svg
 
+## 1.0.11
+
+### Patch Changes
+
+-   a8068ba: update
+-   Updated dependencies [a8068ba]
+    -   @axetroy/iconfont-componentized-parser@1.0.11
+    -   @axetroy/iconfont-componentized-share@1.0.11
+
 ## 1.0.10
 
 ### Patch Changes
