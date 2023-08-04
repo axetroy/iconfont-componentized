@@ -12,21 +12,15 @@
         "build": "tsc"
     },
     "devDependencies": {
-        "@babel/preset-env": "^7.22.9",
-        "@types/yargs": "^17.0.24",
-        "babel-jest": "^29.6.2",
-        "jest": "^29.6.2",
-        "jest-cli": "^29.6.2",
-        "ts-jest": "^29.1.1",
-        "typescript": "^5.1.6"
+        "@types/yargs": "^17.0.24"
     },
     "dependencies": {
-        "@axetroy/iconfont-componentized-gen-react": "1.0.0",
-        "@axetroy/iconfont-componentized-gen-svg": "1.0.0",
-        "@axetroy/iconfont-componentized-gen-vue": "1.0.0",
-        "@axetroy/iconfont-componentized-gen-web-component": "1.0.0",
-        "@axetroy/iconfont-componentized-parser": "1.0.0",
-        "@axetroy/iconfont-componentized-share": "1.0.0",
+        "@axetroy/iconfont-componentized-gen-react": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-gen-svg": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-gen-vue": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-gen-web-component": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-parser": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-share": "workspace:^1.0.0",
         "yargs": "^17.7.2"
     }
 }
