@@ -1,6 +1,6 @@
 {
     "name": "@axetroy/iconfont-componentized-gen-svg",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "main": "dist/index.js",
     "license": "ANTI-996",
     "files": [

@@ -1,5 +1,13 @@
 # @axetroy/iconfont-componentized-share
 
+## 1.0.10
+
+### Patch Changes
+
+-   2f85a33: bump
+-   Updated dependencies [2f85a33]
+    -   @axetroy/iconfont-componentized-parser@1.0.10
+
 ## 1.0.9
 
 ### Patch Changes
