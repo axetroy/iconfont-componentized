@@ -8,4 +8,4 @@
 "@axetroy/iconfont-componentized-share": patch
 ---
 
-update
+update version
