@@ -1,6 +1,6 @@
 {
     "name": "@axetroy/iconfont-componentized-cli",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "bin": {
         "iconfont-componentized": "./dist/index.js"
     },
