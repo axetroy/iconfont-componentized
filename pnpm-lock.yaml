@@ -70,6 +70,22 @@ importers:
         specifier: ^17.0.24
         version: 17.0.24
 
+  packages/iconfont-componentized-gen-dom:
+    dependencies:
+      '@axetroy/iconfont-componentized-parser':
+        specifier: workspace:*
+        version: link:../iconfont-componentized-parser
+      '@axetroy/iconfont-componentized-share':
+        specifier: workspace:*
+        version: link:../iconfont-componentized-share
+      camelcase:
+        specifier: ^6.0.0
+        version: 6.0.0
+    devDependencies:
+      vite:
+        specifier: ^4.4.8
+        version: 4.4.8(@types/node@20.4.5)
+
   packages/iconfont-componentized-gen-react:
     dependencies:
       '@axetroy/iconfont-componentized-parser':
