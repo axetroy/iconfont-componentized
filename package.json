@@ -12,11 +12,14 @@
     "scripts": {
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
-        "format": "prettier **/*.{js,jsx,ts,json,md} --write"
+        "format": "prettier **/*.{js,jsx,ts,json,md} --write",
+        "bump": "pnpm changeset version",
+        "ci:publish": "pnpm publish -r"
     },
     "devDependencies": {
         "@babel/core": "^7.22.9",
         "@babel/preset-env": "^7.22.9",
+        "@changesets/cli": "^2.26.2",
         "@types/jest": "^29.5.3",
         "@types/node": "^20.4.5",
         "babel-jest": "^29.6.2",

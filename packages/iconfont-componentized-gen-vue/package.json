@@ -16,8 +16,8 @@
         "vue": "^2.7.x"
     },
     "dependencies": {
-        "@axetroy/iconfont-componentized-parser": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-share": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-parser": "workspace:*",
+        "@axetroy/iconfont-componentized-share": "workspace:*",
         "camelcase": "^6.0.0"
     }
 }

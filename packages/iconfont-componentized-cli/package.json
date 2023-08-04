@@ -15,12 +15,12 @@
         "@types/yargs": "^17.0.24"
     },
     "dependencies": {
-        "@axetroy/iconfont-componentized-gen-react": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-gen-svg": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-gen-vue": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-gen-web-component": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-parser": "workspace:^1.0.0",
-        "@axetroy/iconfont-componentized-share": "workspace:^1.0.0",
+        "@axetroy/iconfont-componentized-gen-react": "workspace:*",
+        "@axetroy/iconfont-componentized-gen-svg": "workspace:*",
+        "@axetroy/iconfont-componentized-gen-vue": "workspace:*",
+        "@axetroy/iconfont-componentized-gen-web-component": "workspace:*",
+        "@axetroy/iconfont-componentized-parser": "workspace:*",
+        "@axetroy/iconfont-componentized-share": "workspace:*",
         "yargs": "^17.7.2"
     }
 }
