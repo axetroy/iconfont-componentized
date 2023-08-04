@@ -7,7 +7,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                node: ["16"]
+                node: ["18"]
                 os: [ubuntu-latest, macOS-latest, windows-latest]
         name: node.js ${{ matrix.node }} test in ${{ matrix.os }}
         steps:
@@ -15,12 +15,13 @@ jobs:
 
             - name: Environment
               run: |
+                  npm install pnpm -g
                   node -v
                   npm -v
-                  yarn --version
+                  pnpm -v
 
             - name: Install
-              run: yarn
+              run: pnpm install
 
             - name: Compiler
               run: yarn build

@@ -10,8 +10,8 @@
         "packages/*"
     ],
     "scripts": {
-        "build": "yarn workspaces run build",
-        "test": "yarn workspaces run test",
+        "build": "pnpm -r --aggregate-output --filter=./packages/* build",
+        "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write"
     },
     "devDependencies": {
