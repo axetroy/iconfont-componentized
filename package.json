@@ -13,7 +13,7 @@
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write",
-        "ci:version": "pnpm changeset version",
+        "ci:version": "changeset version && pnpm install --no-frozen-lockfile",
         "ci:publish": "pnpm publish -r"
     },
     "devDependencies": {
