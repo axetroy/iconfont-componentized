@@ -1,5 +1,18 @@
 # @axetroy/iconfont-componentized-cli
 
+## 1.0.9
+
+### Patch Changes
+
+-   b9db6f7: bump
+-   Updated dependencies [b9db6f7]
+    -   @axetroy/iconfont-componentized-gen-react@1.0.9
+    -   @axetroy/iconfont-componentized-gen-svg@1.0.9
+    -   @axetroy/iconfont-componentized-gen-vue@1.0.9
+    -   @axetroy/iconfont-componentized-gen-web-component@1.0.9
+    -   @axetroy/iconfont-componentized-parser@1.0.9
+    -   @axetroy/iconfont-componentized-share@1.0.9
+
 ## 1.0.8
 
 ### Patch Changes
