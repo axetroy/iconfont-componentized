@@ -2,7 +2,7 @@ import path from "path";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 import { parseFromURL } from "@iconfont-componentized/parser";
-import { ComponentGenerator } from "@iconfont-componentized/share";
+import { ComponentGenerator, DiskWriter } from "@iconfont-componentized/share";
 import ReactComponentGenerator from "@iconfont-componentized/gen-react";
 import SVGComponentGenerator from "@iconfont-componentized/gen-svg";
 import VueComponentGenerator from "@iconfont-componentized/gen-vue";
@@ -54,19 +54,19 @@ function getGenerator(target: string) {
 
     switch (target.toLowerCase()) {
         case "react":
-            gen = new ReactComponentGenerator();
+            gen = new ReactComponentGenerator(DiskWriter);
             break;
         case "svg":
-            gen = new SVGComponentGenerator();
+            gen = new SVGComponentGenerator(DiskWriter);
             break;
         case "vue":
-            gen = new VueComponentGenerator();
+            gen = new VueComponentGenerator(DiskWriter);
             break;
         case "web-component":
-            gen = new WebComponentGenerator();
+            gen = new WebComponentGenerator(DiskWriter);
             break;
         case "dom":
-            gen = new DOMComponentGenerator();
+            gen = new DOMComponentGenerator(DiskWriter);
         default:
             throw new Error('Invalid target, support "react", "vue", "svg", "web-component", "dom"');
     }
@@ -78,20 +78,22 @@ if (!symbolURL) {
     throw new Error("Missing required argument: url");
 }
 
-parseFromURL(symbolURL)
-    .then((icons) => {
-        for (const target of targets) {
-            const gen = getGenerator(target);
+async function main() {
+    const icons = await parseFromURL(symbolURL);
 
-            const components = gen.generates(icons);
+    for (const target of targets) {
+        const dest = path.join(outputDir, target.toLowerCase());
 
-            const dest = path.join(outputDir, target.toLowerCase());
+        const gen = getGenerator(target);
 
-            gen.write(components, dest);
-        }
-    })
-    .catch((err) => {
-        console.error(err);
+        gen.write(icons, {
+            outputDir: dest,
+        });
+    }
+}
 
-        process.exit(1);
-    });
+main().catch((err) => {
+    console.error(err);
+
+    process.exit(1);
+});

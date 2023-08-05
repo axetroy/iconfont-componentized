@@ -1,10 +1,12 @@
-import { Icon } from "@iconfont-componentized/parser";
-import { ComponentGenerator, Component, writeComponentsToDisk, generateVueVNode } from "@iconfont-componentized/share";
+import { Icon, parseFromURL } from "@iconfont-componentized/parser";
+import { ComponentGenerator, Component, generateVueVNode, WriteConstructor, GeneratorOptions } from "@iconfont-componentized/share";
 import camelcase from "camelcase";
 
 const header = `// generate by iconfont-componentized`;
 
 export default class VueComponentGenerator implements ComponentGenerator {
+    constructor(public Writer: WriteConstructor) {}
+
     generate(icon: Icon): Component {
         const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
@@ -12,7 +14,6 @@ export default class VueComponentGenerator implements ComponentGenerator {
             icon.node,
             12,
             {
-                xmlns: "http://www.w3.org/2000/svg",
                 "...": "this.$attrs",
             },
             "h",
@@ -95,8 +96,12 @@ export default ${componentName};
 
         return components;
     }
-    write(components: Component[], outputDir: string): void {
-        writeComponentsToDisk(components, outputDir);
+    async write(url: string | Icon[], options: GeneratorOptions): Promise<void> {
+        const icons = typeof url === "string" ? await parseFromURL(url) : url;
+
+        const components = this.generates(icons);
+
+        await new this.Writer().write(components, options);
     }
 }
 

@@ -1,20 +1,28 @@
 import { SvgNode } from "@iconfont-componentized/parser";
 
 export * from "./generator";
+export * from "./writer";
 
 const svgNameSpace = "http://www.w3.org/2000/svg";
 
 export function generateSvg(node: SvgNode, indent: number, rootProps: Record<string, any>): string {
     const indentSpace = " ".repeat(indent);
 
-    const attributes: Record<string, string> = { ...node.attributes, ...(node.name === "svg" ? { xmlns: svgNameSpace, ...rootProps } : {}) };
+    const attributes: Record<string, string> = { ...node.attributes, ...rootProps };
+
+    delete attributes["id"];
+    delete attributes["..."];
+
+    if (node.name === "svg") {
+        attributes["xmlns"] = svgNameSpace;
+    }
+
+    if (rootProps["..."]) {
+        attributes["..."] = rootProps["..."];
+    }
 
     let attrs = Object.keys(attributes || [])
         .map((key) => {
-            if (node.name === "svg" && key === "id") {
-                return;
-            }
-
             if (key === "...") {
                 return `{ ...${attributes[key]} }`;
             }
@@ -40,6 +48,10 @@ export function generateVueVNode(node: SvgNode, indent: number, rootProps: Recor
 
     delete attributes["id"]; // remove id property
     delete attributes["..."]; // remove spread property
+
+    if (node.name === "svg") {
+        attributes["xmlns"] = svgNameSpace;
+    }
 
     const properties = (() => {
         const hasCustomProperty = Object.keys(attributes).length;

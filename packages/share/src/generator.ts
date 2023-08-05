@@ -1,6 +1,5 @@
 import { Icon } from "@iconfont-componentized/parser";
-import fs from "fs-extra";
-import path from "path";
+import { WriteConstructor, WriterOptions } from "./writer";
 
 export interface File {
     filepath: string; // 完整的文件路径
@@ -16,20 +15,10 @@ export interface Component {
 
 // 组件生成器
 export interface ComponentGenerator {
+    Writer: WriteConstructor;
     generate(icon: Icon): Component; // 生成单个组件
     generates(icons: Icon[]): Component[]; // 生成多个组件
-    write(components: Array<Component>, outputDir: string): void; // 写入磁盘
+    write(url: string | Icon[], options: GeneratorOptions): Promise<void>;
 }
 
-// 将组件写入磁盘
-export function writeComponentsToDisk(components: Component[], outputDir: string) {
-    for (const component of components) {
-        for (const file of component.files) {
-            const absoluteFilepath = path.join(outputDir, ...file.filepath.split("/"));
-
-            fs.ensureDirSync(path.dirname(absoluteFilepath));
-
-            fs.writeFileSync(absoluteFilepath, file.content);
-        }
-    }
-}
+export interface GeneratorOptions extends WriterOptions {}
