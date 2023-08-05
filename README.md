@@ -2,36 +2,53 @@
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
 [![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
-### Make IconFont Componentized
+### IconFont Componentized
 
-IconFont Componentized is a series of tools for converting IconFont into components of various common frameworks.
+IconFont Componentized 是一系列工具，用于生成 IconFont 组件用于各种框架/环境中。
 
-### Feature
+### 支持生成的框架/环境
 
--   Support generate for `React`/`Vue`/`SVG`/`WebComponent`/`DOM` and more...
+-   [React](packages/gen-react/__tests__/output.spec.1/)
+-   [Vue](packages/gen-vue/__tests__/output.spec.1/)
+-   [WebComponent](packages/gen-web-component/__tests__/output.spec.1/)
+-   [DOM](packages/gen-dom/__tests__/output.spec.1/)
+-   [SVG](packages/gen-svg/__tests__/output.spec.1/)
 
-#### Usage
+#### 使用方法
 
-1. Install CLI
+1. 安装依赖
 
 ```bash
 npm install @iconfont-componentized/cli -D
 ```
 
-2. Add script to your `package.json`
+2. 获取 IconFont 的地址
+
+![img](assets/1.png)
+
+4. 添加生成脚本到 `package.json`
 
 ```json
    "script": {
-       "gen:iconfont": "iconfont-componentized --url https://example.com"
+       "iconfont": "iconfont-componentized --url https://at.alicdn.com/t/font_caopq7l9o8t1emi.js"
    }
 ```
 
-3. Run the script
+4. 生成组件
 
 ```bash
-npm run gen:iconfont
+npm run iconfont
 ```
 
-### License
+### 参与贡献
+
+```bash
+git clone https://github.com/axetroy/iconfont-componentized
+cd iconfont-componentized
+pnpm install
+pnpm test
+```
+
+### 开源许可
 
 [ANTI-996 LICENSE](LICENSE)
