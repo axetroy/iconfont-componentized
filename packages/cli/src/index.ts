@@ -5,7 +5,7 @@ import { parseFromURL } from "@iconfont-componentized/parser";
 import { ComponentGenerator } from "@iconfont-componentized/share";
 import ReactComponentGenerator from "@iconfont-componentized/gen-react";
 import SVGComponentGenerator from "@iconfont-componentized/gen-svg";
-import VueComponentGenerator from "@iconfont-componentized/gen-Vue";
+import VueComponentGenerator from "@iconfont-componentized/gen-vue";
 import WebComponentComponentGenerator from "@iconfont-componentized/gen-web-component";
 
 const argv = yargs(hideBin(process.argv)).argv;
