@@ -1,5 +1,11 @@
 # @iconfont-componentized/parser
 
+## 0.1.3
+
+### Patch Changes
+
+-   3ecc772: bump
+
 ## 0.1.2
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @iconfont-componentized/cli
 
+## 0.1.3
+
+### Patch Changes
+
+-   3ecc772: bump
+-   Updated dependencies [3ecc772]
+    -   @iconfont-componentized/gen-dom@0.1.3
+    -   @iconfont-componentized/gen-react@0.1.3
+    -   @iconfont-componentized/gen-svg@0.1.3
+    -   @iconfont-componentized/gen-vue@0.1.3
+    -   @iconfont-componentized/gen-web-component@0.1.3
+    -   @iconfont-componentized/parser@0.1.3
+    -   @iconfont-componentized/share@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
