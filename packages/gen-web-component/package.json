@@ -1,0 +1,24 @@
+{
+    "name": "@iconfont-componentized/gen-web-component",
+    "version": "0.1.0",
+    "main": "dist/index.js",
+    "license": "ANTI-996",
+    "files": [
+        "dist",
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "test": "jest",
+        "test:ci": "jest --ci --silent --coverage false",
+        "dev": "tsc -w",
+        "build": "tsc"
+    },
+    "dependencies": {
+        "@iconfont-componentized/parser": "workspace:*",
+        "@iconfont-componentized/share": "workspace:*",
+        "camelcase": "^6.0.0",
+        "decamelize": "^5.0.0"
+    }
+}

@@ -15,7 +15,7 @@ IconFont Componentized is a series of tools for converting IconFont into compone
 1. Install CLI
 
 ```bash
-npm install @axetroy/iconfont-componentized-cli -D
+npm install @iconfont-componentized/cli -D
 ```
 
 2. Add script to your `package.json`

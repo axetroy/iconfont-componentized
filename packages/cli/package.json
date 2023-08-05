@@ -1,0 +1,32 @@
+{
+    "name": "@iconfont-componentized/cli",
+    "version": "0.1.0",
+    "bin": {
+        "iconfont-componentized": "./dist/index.js"
+    },
+    "license": "ANTI-996",
+    "files": [
+        "dist",
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "test": "jest",
+        "test:ci": "jest --ci --silent --coverage false",
+        "dev": "tsc -w",
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "@types/yargs": "^17.0.24"
+    },
+    "dependencies": {
+        "@iconfont-componentized/gen-react": "workspace:*",
+        "@iconfont-componentized/gen-svg": "workspace:*",
+        "@iconfont-componentized/gen-vue": "workspace:*",
+        "@iconfont-componentized/gen-web-component": "workspace:*",
+        "@iconfont-componentized/parser": "workspace:*",
+        "@iconfont-componentized/share": "workspace:*",
+        "yargs": "^17.7.2"
+    }
+}

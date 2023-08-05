@@ -42,26 +42,26 @@ importers:
         specifier: ^5.1.6
         version: 5.1.6
 
-  packages/iconfont-componentized-cli:
+  packages/cli:
     dependencies:
-      '@axetroy/iconfont-componentized-gen-react':
+      '@iconfont-componentized/gen-react':
         specifier: workspace:*
-        version: link:../iconfont-componentized-gen-react
-      '@axetroy/iconfont-componentized-gen-svg':
+        version: link:../gen-react
+      '@iconfont-componentized/gen-svg':
         specifier: workspace:*
-        version: link:../iconfont-componentized-gen-svg
-      '@axetroy/iconfont-componentized-gen-vue':
+        version: link:../gen-svg
+      '@iconfont-componentized/gen-vue':
         specifier: workspace:*
-        version: link:../iconfont-componentized-gen-vue
-      '@axetroy/iconfont-componentized-gen-web-component':
+        version: link:../gen-vue
+      '@iconfont-componentized/gen-web-component':
         specifier: workspace:*
-        version: link:../iconfont-componentized-gen-web-component
-      '@axetroy/iconfont-componentized-parser':
+        version: link:../gen-web-component
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -70,14 +70,14 @@ importers:
         specifier: ^17.0.24
         version: 17.0.24
 
-  packages/iconfont-componentized-gen-dom:
+  packages/gen-dom:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0
@@ -86,14 +86,14 @@ importers:
         specifier: ^4.4.8
         version: 4.4.8(@types/node@20.4.5)
 
-  packages/iconfont-componentized-gen-react:
+  packages/gen-react:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0
@@ -117,14 +117,14 @@ importers:
         specifier: ^4.4.8
         version: 4.4.8(@types/node@20.4.5)
 
-  packages/iconfont-componentized-gen-svg:
+  packages/gen-svg:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0
@@ -133,14 +133,14 @@ importers:
         specifier: ^4.4.8
         version: 4.4.8(@types/node@20.4.5)
 
-  packages/iconfont-componentized-gen-vue:
+  packages/gen-vue:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0
@@ -155,14 +155,14 @@ importers:
         specifier: ^2.7.x
         version: 2.7.0
 
-  packages/iconfont-componentized-gen-web-component:
+  packages/gen-web-component:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
-      '@axetroy/iconfont-componentized-share':
+        version: link:../parser
+      '@iconfont-componentized/share':
         specifier: workspace:*
-        version: link:../iconfont-componentized-share
+        version: link:../share
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0
@@ -170,7 +170,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
 
-  packages/iconfont-componentized-parser:
+  packages/parser:
     dependencies:
       axios:
         specifier: ^1.4.0
@@ -179,11 +179,11 @@ importers:
         specifier: ^5.3.1
         version: 5.3.1
 
-  packages/iconfont-componentized-share:
+  packages/share:
     dependencies:
-      '@axetroy/iconfont-componentized-parser':
+      '@iconfont-componentized/parser':
         specifier: workspace:*
-        version: link:../iconfont-componentized-parser
+        version: link:../parser
       camelcase:
         specifier: ^6.0.0
         version: 6.0.0

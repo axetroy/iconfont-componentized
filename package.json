@@ -1,6 +1,6 @@
 {
-    "name": "@axetroy/iconfont-componentized",
-    "version": "1.0.4",
+    "name": "iconfont-componentized",
+    "version": "1.0.0",
     "main": "index.js",
     "repository": "git@github.com:axetroy/iconfont-componentized.git",
     "author": "Axetroy <axetroy.dev@gmail.com>",
