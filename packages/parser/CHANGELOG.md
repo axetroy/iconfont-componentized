@@ -1,5 +1,11 @@
 # @iconfont-componentized/parser
 
+## 0.1.1
+
+### Patch Changes
+
+-   061d338: update
+
 ## 1.0.10
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @iconfont-componentized/gen-vue
 
+## 0.1.1
+
+### Patch Changes
+
+-   061d338: update
+-   Updated dependencies [061d338]
+    -   @iconfont-componentized/parser@0.1.1
+    -   @iconfont-componentized/share@0.1.1
+
 ## 1.0.10
 
 ### Patch Changes
