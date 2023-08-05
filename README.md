@@ -26,7 +26,7 @@ npm install @iconfont-componentized/cli -D
 
 ![img](assets/1.png)
 
-4. 添加生成脚本到 `package.json`
+3. 添加生成脚本到 `package.json`
 
 ```json
    "script": {
