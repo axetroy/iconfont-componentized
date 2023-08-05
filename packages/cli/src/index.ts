@@ -6,7 +6,8 @@ import { ComponentGenerator } from "@iconfont-componentized/share";
 import ReactComponentGenerator from "@iconfont-componentized/gen-react";
 import SVGComponentGenerator from "@iconfont-componentized/gen-svg";
 import VueComponentGenerator from "@iconfont-componentized/gen-vue";
-import WebComponentComponentGenerator from "@iconfont-componentized/gen-web-component";
+import WebComponentGenerator from "@iconfont-componentized/gen-web-component";
+import DOMComponentGenerator from "@iconfont-componentized/gen-dom";
 
 const argv = yargs(hideBin(process.argv)).argv;
 
@@ -18,7 +19,7 @@ function printHelp(exitCode: number = 0) {
 
 [options]:
     --url          Url of iconfont symbol for generate icon component
-    --target       The generate target. support 'react', 'vue', 'svg', 'web-component'
+    --target       The generate target. multiple targets split with ','. support 'react', 'vue', 'svg', 'web-component'
     --output       The output directory. defaults to '$PWD/components'
     -h,--help      Print help
     -V,--version   Print version
@@ -45,7 +46,7 @@ if (argv["h"] || argv["help"]) {
 
 const symbolURL = argv["url"];
 const outputDir = argv["output"] ?? path.join(process.cwd(), "components");
-const targetStr = (argv["target"] as string) ?? "react,vue,svg,web-component";
+const targetStr = (argv["target"] as string) ?? "react,vue,svg,web-component,dom";
 const targets = targetStr.split(",").map((v) => v.trim());
 
 function getGenerator(target: string) {
@@ -62,10 +63,12 @@ function getGenerator(target: string) {
             gen = new VueComponentGenerator();
             break;
         case "web-component":
-            gen = new WebComponentComponentGenerator();
+            gen = new WebComponentGenerator();
             break;
+        case "dom":
+            gen = new DOMComponentGenerator();
         default:
-            throw new Error('Invalid target, support "react", "vue", "svg", "web-component"');
+            throw new Error('Invalid target, support "react", "vue", "svg", "web-component", "dom"');
     }
 
     return gen;

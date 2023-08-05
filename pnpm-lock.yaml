@@ -44,6 +44,9 @@ importers:
 
   packages/cli:
     dependencies:
+      '@iconfont-componentized/gen-dom':
+        specifier: workspace:*
+        version: link:../gen-dom
       '@iconfont-componentized/gen-react':
         specifier: workspace:*
         version: link:../gen-react

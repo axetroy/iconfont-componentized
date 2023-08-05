@@ -25,6 +25,7 @@
         "@iconfont-componentized/gen-svg": "workspace:*",
         "@iconfont-componentized/gen-vue": "workspace:*",
         "@iconfont-componentized/gen-web-component": "workspace:*",
+        "@iconfont-componentized/gen-dom": "workspace:*",
         "@iconfont-componentized/parser": "workspace:*",
         "@iconfont-componentized/share": "workspace:*",
         "yargs": "^17.7.2"
