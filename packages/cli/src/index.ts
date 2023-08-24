@@ -57,19 +57,20 @@ function getGenerator(target: string, config: Config) {
         case "react":
             gen = new ReactComponentGenerator(DiskWriter, config);
             break;
-        case "svg":
-            gen = new SVGComponentGenerator(DiskWriter, config);
-            break;
         case "vue":
             gen = new VueComponentGenerator(DiskWriter, config);
+            break;
+        case "svg":
+            gen = new SVGComponentGenerator(DiskWriter, config);
             break;
         case "web-component":
             gen = new WebComponentGenerator(DiskWriter, config);
             break;
         case "dom":
             gen = new DOMComponentGenerator(DiskWriter, config);
+            break;
         default:
-            throw new Error('Invalid target, support "react", "vue", "svg", "web-component", "dom"');
+            throw new Error(`Invalid target "${target}", support "react", "vue", "svg", "web-component", "dom"`);
     }
 
     return gen;
