@@ -1,5 +1,22 @@
 # @iconfont-componentized/cli
 
+## 0.2.0
+
+### Minor Changes
+
+-   94384b3: bump version
+
+### Patch Changes
+
+-   Updated dependencies [94384b3]
+    -   @iconfont-componentized/gen-dom@0.2.0
+    -   @iconfont-componentized/gen-react@0.2.0
+    -   @iconfont-componentized/gen-svg@0.2.0
+    -   @iconfont-componentized/gen-vue@0.2.0
+    -   @iconfont-componentized/gen-web-component@0.2.0
+    -   @iconfont-componentized/parser@0.2.0
+    -   @iconfont-componentized/share@0.2.0
+
 ## 0.1.3
 
 ### Patch Changes
