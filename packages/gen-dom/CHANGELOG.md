@@ -1,5 +1,14 @@
 # @iconfont-componentized/gen-svg
 
+## 0.2.1
+
+### Patch Changes
+
+-   3cb8212: bump
+-   Updated dependencies [3cb8212]
+    -   @iconfont-componentized/parser@0.2.1
+    -   @iconfont-componentized/share@0.2.1
+
 ## 0.2.0
 
 ### Minor Changes

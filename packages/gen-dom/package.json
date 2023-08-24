@@ -1,6 +1,6 @@
 {
     "name": "@iconfont-componentized/gen-dom",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "main": "dist/index.js",
     "repository": "https://github.com/axetroy/iconfont-componentized",
     "license": "ANTI-996",
