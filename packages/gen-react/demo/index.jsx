@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
-import IconFont, { IconFontJia, IconFontAnonymousIconfont, IconFontBriefcase, IconFontCanjuYongcan } from "../__tests__/output.spec.1";
+
+import IconFont, { IconFontAnonymousIconfont, IconFontBriefcase, IconFontCanjuYongcan, IconFontJia } from "../__tests__/output.spec.1";
 
 const container = document.getElementById("root");
 
@@ -8,16 +9,16 @@ const root = createRoot(container);
 root.render(
     <div>
         <div>
-            <IconFont name="jia" style={{ width: 20, height: 20 }}></IconFont>
-            <IconFont name="anonymous-iconfont" style={{ width: 20, height: 20 }}></IconFont>
-            <IconFont name="briefcase" style={{ width: 20, height: 20 }}></IconFont>
-            <IconFont name="canju-yongcan" style={{ width: 20, height: 20 }}></IconFont>
+            <IconFont name="jia" size={16}></IconFont>
+            <IconFont name="anonymous-iconfont" size={32}></IconFont>
+            <IconFont name="briefcase" style={{ width: 64, height: 64 }}></IconFont>
+            <IconFont name="canju-yongcan" className="icon"></IconFont>
         </div>
         <div>
-            <IconFontJia style={{ width: 20, height: 20 }}></IconFontJia>
-            <IconFontAnonymousIconfont style={{ width: 20, height: 20 }}></IconFontAnonymousIconfont>
-            <IconFontBriefcase style={{ width: 20, height: 20 }}></IconFontBriefcase>
-            <IconFontCanjuYongcan style={{ width: 20, height: 20 }}></IconFontCanjuYongcan>
+            <IconFontJia size={16}></IconFontJia>
+            <IconFontAnonymousIconfont size={32}></IconFontAnonymousIconfont>
+            <IconFontBriefcase style={{ width: 64, height: 64 }}></IconFontBriefcase>
+            <IconFontCanjuYongcan className="icon"></IconFontCanjuYongcan>
         </div>
     </div>,
 );

@@ -1,5 +1,10 @@
 // generate by iconfont-componentized
 
-declare const IconFontJia: () => SVGElement;
+export interface IconFontJiaProps {
+    size?: number | string;
+    className?: string;
+}
+
+declare const IconFontJia: (props: IconFontJiaProps) => SVGElement;
 
 export default IconFontJia;

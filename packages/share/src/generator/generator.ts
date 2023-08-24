@@ -1,5 +1,7 @@
 import { Icon } from "@iconfont-componentized/parser";
-import { WriteConstructor, WriterOptions } from "./writer";
+
+import { Config } from "../config";
+import { WriteConstructor, WriterOptions } from "../writer";
 
 export interface File {
     filepath: string; // 完整的文件路径
@@ -15,6 +17,7 @@ export interface Component {
 
 // 组件生成器
 export interface ComponentGenerator {
+    config: Config;
     Writer: WriteConstructor;
     generate(icon: Icon): Component; // 生成单个组件
     generates(icons: Icon[]): Component[]; // 生成多个组件
@@ -22,3 +25,22 @@ export interface ComponentGenerator {
 }
 
 export interface GeneratorOptions extends WriterOptions {}
+
+export interface PropertySpread {
+    type: "spread";
+    value: string;
+}
+
+export interface PropertyNormal {
+    type: "normal";
+    key: string;
+    value: unknown;
+}
+
+export interface PropertyVariable {
+    type: "variable";
+    key: string;
+    value: unknown;
+}
+
+export type Property = PropertySpread | PropertyNormal | PropertyVariable;

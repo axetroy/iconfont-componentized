@@ -1,20 +1,62 @@
 import { Icon, parseFromURL } from "@iconfont-componentized/parser";
-import { generateSvgDOM, ComponentGenerator, Component, WriteConstructor, GeneratorOptions } from "@iconfont-componentized/share";
+import { Component, ComponentGenerator, Config, generateSvgDOM, GeneratorOptions, WriteConstructor } from "@iconfont-componentized/share";
 import camelcase from "camelcase";
 
 const header = `// generate by iconfont-componentized`;
 
 export default class DOMComponentGenerator implements ComponentGenerator {
-    constructor(public Writer: WriteConstructor) {}
+    constructor(
+        public Writer: WriteConstructor,
+        public config: Config,
+    ) {}
 
     generate(icon: Icon): Component {
         const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
 
-        const componentStr = header + "\n\n" + generateSvgDOM(icon.node, 0, componentName);
+        const defaultSize = this.config.defaultSize;
+        const classNamePrefix = this.config.classNamePrefix;
+
+        const componentStr = generateSvgDOM(icon.node, 4, [
+            {
+                type: "variable",
+                key: "width",
+                value: `props.size ?? "${defaultSize}"`,
+            },
+            {
+                type: "variable",
+                key: "height",
+                value: `props.size ?? "${defaultSize}"`,
+            },
+            {
+                type: "variable",
+                key: "class",
+                value: `classNames`,
+            },
+        ]);
+
+        const componentContent = `${header}
+
+export default function ${componentName}(props) {
+    const classNameParts = ['${classNamePrefix}', '${classNamePrefix}-${icon.id}'];
+
+    if (props.className) {
+        classNameParts.push(props.className);
+    }
+
+    const classNames = classNameParts.join(' ');
+
+${componentStr}
+}
+`;
 
         const componentDeclaration = `${header}
 
-declare const ${componentName}: () => SVGElement;
+export interface ${componentName}Props {
+    size?: number | string;
+    className?: string;
+}
+
+declare const ${componentName}: (props: ${componentName}Props) => SVGElement;
 
 export default ${componentName};
 `;
@@ -25,7 +67,7 @@ export default ${componentName};
             files: [
                 {
                     filepath: componentName + ".js",
-                    content: componentStr,
+                    content: componentContent,
                 },
                 {
                     filepath: componentName + ".d.ts",
@@ -43,7 +85,7 @@ export default ${componentName};
             files: [
                 {
                     filepath: "index.js",
-                    content: generateIndexComponent(components),
+                    content: this.generateIndexComponent(components),
                 },
                 {
                     filepath: "index.d.ts",
@@ -60,6 +102,36 @@ export default ${componentName};
         const components = this.generates(icons);
 
         await new this.Writer().write(components, options);
+    }
+
+    private generateIndexComponent(components: Component[]) {
+        return `${header}
+
+${components
+    .map((component) => {
+        return `import ${component.componentName} from "./${component.componentName}";`;
+    })
+    .join("\n")}
+
+${components
+    .map((component) => {
+        return `export { ${component.componentName} };`;
+    })
+    .join("\n")}
+
+export default function IconFont({ name, size, className } = {}) {
+    switch (name) {
+${components
+    .map((v) => {
+        const indentSpace = " ".repeat(8);
+
+        return `${indentSpace}case '${v.id}': return ${v.componentName}({ size, className });`;
+    })
+    .join("\n")}
+        default:
+            throw new Error(\`IconFont\'s name must one of ${JSON.stringify(components.map((v) => v.id))} but got "\${name}"\`)
+    }
+}`;
     }
 }
 
@@ -81,43 +153,13 @@ ${components
     .join("\n")}
 
 interface IconFontProps {
-    name: IconFontName
+    name: IconFontName;
+    size?: number | string;
+    className?: string;
 }
 
 declare var IconFont: (props: IconFontProps) => SVGElement;
 
 export default IconFont;
 `;
-}
-
-function generateIndexComponent(components: Component[]) {
-    return `${header}
-
-${components
-    .map((component) => {
-        return `import ${component.componentName} from "./${component.componentName}";`;
-    })
-    .join("\n")}
-
-${components
-    .map((component) => {
-        return `export { ${component.componentName} };`;
-    })
-    .join("\n")}
-
-export default function IconFont({ name } = {}) {
-    switch (name) {
-${components
-    .map((v) => {
-        const indentSpace = " ".repeat(8);
-
-        return `${indentSpace}case '${v.id}': return ${v.componentName}();`;
-    })
-    .join("\n")}
-        default:
-            var defaultIcon = document.createElement("i");
-            defaultIcon.setAttribute("style", "display: none");
-            return defaultIcon;
-    }
-}`;
 }

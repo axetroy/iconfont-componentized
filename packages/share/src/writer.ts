@@ -1,7 +1,8 @@
-import path from "path";
 import fs from "fs-extra";
 import JSZip from "jszip";
-import { Component } from "./generator";
+import path from "path";
+
+import { Component } from "./generator/generator";
 
 export interface WriterOptions {
     outputDir?: string;

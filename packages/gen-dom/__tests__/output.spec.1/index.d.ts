@@ -15,7 +15,9 @@ export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
 interface IconFontProps {
-    name: IconFontName
+    name: IconFontName;
+    size?: number | string;
+    className?: string;
 }
 
 declare var IconFont: (props: IconFontProps) => SVGElement;

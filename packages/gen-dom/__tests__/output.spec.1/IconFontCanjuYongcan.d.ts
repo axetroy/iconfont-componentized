@@ -1,5 +1,10 @@
 // generate by iconfont-componentized
 
-declare const IconFontCanjuYongcan: () => SVGElement;
+export interface IconFontCanjuYongcanProps {
+    size?: number | string;
+    className?: string;
+}
+
+declare const IconFontCanjuYongcan: (props: IconFontCanjuYongcanProps) => SVGElement;
 
 export default IconFontCanjuYongcan;

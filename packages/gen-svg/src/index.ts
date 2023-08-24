@@ -1,20 +1,32 @@
 import { Icon, parseFromURL } from "@iconfont-componentized/parser";
-import { generateSvg, ComponentGenerator, WriteConstructor, Component, GeneratorOptions } from "@iconfont-componentized/share";
+import { Component, ComponentGenerator, Config, generateSvgJSX, GeneratorOptions, WriteConstructor } from "@iconfont-componentized/share";
 import camelcase from "camelcase";
 
 const header = `// generate by iconfont-componentized`;
 
 export default class SVGComponentGenerator implements ComponentGenerator {
-    constructor(public Writer: WriteConstructor) {}
+    constructor(
+        public Writer: WriteConstructor,
+        public config: Config,
+    ) {}
 
     generate(icon: Icon): Component {
         const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
+
+        const defaultSize = this.config.defaultSize;
+        const classNamePrefix = this.config.classNamePrefix;
 
         const svgHeader = `<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 `;
 
-        const svgStr = svgHeader + generateSvg(icon.node, 0, {});
+        const svgStr =
+            svgHeader +
+            generateSvgJSX(icon.node, 0, [
+                { type: "normal", key: "width", value: defaultSize },
+                { type: "normal", key: "height", value: defaultSize },
+                { type: "normal", key: "class", value: `${classNamePrefix} ${classNamePrefix}-${icon.id}` },
+            ]);
 
         const componentDeclaration = `${header}
 

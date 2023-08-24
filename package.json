@@ -13,7 +13,7 @@
         "build": "pnpm -r --aggregate-output --filter=./packages/* build",
         "test": "pnpm -r --aggregate-output --filter=./packages/* test",
         "format": "prettier **/*.{js,jsx,ts,json,md} --write",
-        "lint": "eslint --fix packages/**/*.ts",
+        "lint": "eslint --fix **/*.ts",
         "changeset:release": "pnpm build && pnpm publish -r --access public --registry=https://registry.npmjs.org",
         "changeset:version": "changeset version && pnpm install --lockfile-only",
         "prepublishOnly": "pnpm build"

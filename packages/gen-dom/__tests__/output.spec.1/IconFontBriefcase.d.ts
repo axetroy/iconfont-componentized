@@ -1,5 +1,10 @@
 // generate by iconfont-componentized
 
-declare const IconFontBriefcase: () => SVGElement;
+export interface IconFontBriefcaseProps {
+    size?: number | string;
+    className?: string;
+}
+
+declare const IconFontBriefcase: (props: IconFontBriefcaseProps) => SVGElement;
 
 export default IconFontBriefcase;

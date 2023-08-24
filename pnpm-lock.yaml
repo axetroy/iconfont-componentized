@@ -95,6 +95,9 @@ importers:
       '@iconfont-componentized/share':
         specifier: workspace:*
         version: link:../share
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.1.1
       yargs:
         specifier: ^17.7.2
         version: 17.7.2

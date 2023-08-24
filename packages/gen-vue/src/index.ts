@@ -1,20 +1,52 @@
 import { Icon, parseFromURL } from "@iconfont-componentized/parser";
-import { ComponentGenerator, Component, generateVueVNode, WriteConstructor, GeneratorOptions } from "@iconfont-componentized/share";
+import { Component, ComponentGenerator, Config, generateVueVNode, GeneratorOptions, WriteConstructor } from "@iconfont-componentized/share";
 import camelcase from "camelcase";
 
 const header = `// generate by iconfont-componentized`;
 
 export default class VueComponentGenerator implements ComponentGenerator {
-    constructor(public Writer: WriteConstructor) {}
+    constructor(
+        public Writer: WriteConstructor,
+        public config: Config,
+    ) {}
 
     generate(icon: Icon): Component {
         const componentName = camelcase("icon-font-" + icon.id, { pascalCase: true });
+
+        const defaultSize = this.config.defaultSize;
+        const classNamePrefix = this.config.classNamePrefix;
 
         const vNodeString = generateVueVNode(
             icon.node,
             12,
             {
-                "...": "this.$attrs",
+                attrs: [
+                    {
+                        type: "spread",
+                        value: "(this.$attrs || {})",
+                    },
+                    {
+                        type: "variable",
+                        key: "width",
+                        value: "this.size",
+                    },
+                    {
+                        type: "variable",
+                        key: "height",
+                        value: "this.size",
+                    },
+                    {
+                        type: "variable",
+                        key: "className",
+                        value: "this.classNames",
+                    },
+                ],
+                listeners: [
+                    {
+                        type: "spread",
+                        value: "(this.$listeners || {})",
+                    },
+                ],
             },
             "h",
         );
@@ -23,6 +55,23 @@ export default class VueComponentGenerator implements ComponentGenerator {
 
 export default {
     name: "${componentName}",
+    props: {
+        size: {
+            type: [String, Number],
+            default: ${defaultSize}
+        }
+    },
+    computed: {
+        classNames({ $attrs }) {
+            const classNameParts = ['${classNamePrefix}', '${classNamePrefix}-${icon.id}'];
+
+            if ($attrs.className) {
+                classNameParts.push($attrs.className);
+            }
+
+            return classNameParts.join(' ');
+        }
+    },
     render(h) {
         return (
 ${vNodeString}
@@ -70,7 +119,7 @@ export default ${componentName};
                 files: [
                     {
                         filepath: "index.js",
-                        content: generateIndexComponent(components),
+                        content: this.generateIndexComponent(components),
                     },
                     {
                         filepath: "index.d.ts",
@@ -103,10 +152,11 @@ export default ${componentName};
 
         await new this.Writer().write(components, options);
     }
-}
 
-function generateIndexComponent(components: Component[]) {
-    return `${header}
+    private generateIndexComponent(components: Component[]) {
+        const defaultSize = this.config.defaultSize;
+
+        return `${header}
 
 ${components
     .map((v) => {
@@ -131,8 +181,14 @@ ${components
     .join("\n")}
     },
     props: {
-        name: String,
-        required: true
+        name: {
+            type: String,
+            required: true
+        },
+        size: {
+            type: [String, Number],
+            default: ${defaultSize}
+        }
     },
     render(h) {
         switch (this.name) {
@@ -148,28 +204,38 @@ ${components
                 children: [],
             },
             0,
-            { "...": "this.$attrs" },
+            {
+                attrs: [
+                    {
+                        type: "spread",
+                        value: "(this.$attrs || {})",
+                    },
+                ],
+                props: [
+                    {
+                        type: "variable",
+                        key: "size",
+                        value: "this.size",
+                    },
+                ],
+                listeners: [
+                    {
+                        type: "spread",
+                        value: "(this.$listeners || {})",
+                    },
+                ],
+            },
             "h",
         )};`;
     })
     .join("\n")}
             default:
-                return ${generateVueVNode(
-                    {
-                        name: "div",
-                        type: "div",
-                        value: "",
-                        attributes: {},
-                        children: [],
-                    },
-                    0,
-                    { style: { display: "none" }, "...": "this.$attrs" },
-                    "h",
-                )};
+                throw new Error(\`IconFont\'s name must one of ${JSON.stringify(components.map((v) => v.id))} but got "\${this.name}"\`)
         }
     }
 }
 `;
+    }
 }
 
 function generateIndexComponentDeclaration(components: Component[]) {

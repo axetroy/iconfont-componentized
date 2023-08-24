@@ -12,16 +12,14 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
-export default function IconFont({ name } = {}) {
+export default function IconFont({ name, size, className } = {}) {
     switch (name) {
-        case 'jia': return IconFontJia();
-        case 'briefcase': return IconFontBriefcase();
-        case 'anonymous-iconfont': return IconFontAnonymousIconfont();
-        case 'jiesuan': return IconFontJiesuan();
-        case 'canju-yongcan': return IconFontCanjuYongcan();
+        case 'jia': return IconFontJia({ size, className });
+        case 'briefcase': return IconFontBriefcase({ size, className });
+        case 'anonymous-iconfont': return IconFontAnonymousIconfont({ size, className });
+        case 'jiesuan': return IconFontJiesuan({ size, className });
+        case 'canju-yongcan': return IconFontCanjuYongcan({ size, className });
         default:
-            var defaultIcon = document.createElement("i");
-            defaultIcon.setAttribute("style", "display: none");
-            return defaultIcon;
+            throw new Error(`IconFont's name must one of ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"] but got "${name}"`)
     }
 }

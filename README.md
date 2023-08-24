@@ -22,19 +22,28 @@ IconFont Componentized 是一系列工具，用于生成 IconFont 组件用于�
 npm install @iconfont-componentized/cli -D
 ```
 
-2. 获取 IconFont 的地址
+2. 生成配置文件 `iconfont-componentized.json`
+
+```json
+{
+    "defaultSize": 32,
+    "classNamePrefix": "icon-font"
+}
+```
+
+3. 获取 IconFont 的地址
 
 ![img](assets/1.png)
 
-3. 添加生成脚本到 `package.json`
+4. 添加生成脚本到 `package.json`
 
 ```json
    "script": {
-       "iconfont": "iconfont-componentized --url https://at.alicdn.com/t/font_caopq7l9o8t1emi.js"
+       "iconfont": "iconfont-componentized --url https://at.alicdn.com/t/font_caopq7l9o8t1emi.js --config iconfont-componentized.json"
    }
 ```
 
-4. 生成组件
+5. 生成组件
 
 ```bash
 npm run iconfont

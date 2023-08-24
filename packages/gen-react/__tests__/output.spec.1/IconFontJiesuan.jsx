@@ -1,8 +1,19 @@
-import React from 'react';
+// generate by iconfont-componentized
+import React, { memo, useMemo } from 'react';
 
-export default function IconFontJiesuan (props) {
+function IconFontJiesuan (props) {
+    const classNames = useMemo(() => {
+        const classNameParts = ['icon-font', 'icon-font-jiesuan'];
+
+        if (props.className) {
+            classNameParts.push(props.className);
+        }
+
+        return classNameParts.join(' ');
+    }, [props.className]);
+
     return (
-        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" { ...props }>
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width={props.size} height={props.size} {...props} className={classNames}>
             <path d="M383 873.4c-28.8 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C435.4 850 411.8 873.4 383 873.4L383 873.4zM383 873.4" />
             <path d="M743.6 873.4c-29 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C796 850 772.4 873.4 743.6 873.4L743.6 873.4zM743.6 873.4" />
             <path d="M376.2 744.6c-37.6 0-70.6-29.6-75.2-67.6l-43.6-307.4-24.8-144c-1.4-11.6-12.2-22-23.2-22L176.4 203.6c-14.6 0-26.6-12-26.6-26.6 0-14.6 12-26.6 26.6-26.6l32.8 0c38 0 71.4 29.6 76 67.4l24.8 143.4L354 670.2c1.4 11.2 11.8 21.2 22.2 21.2l418.4 0c14.6 0 26.6 12 26.6 26.6 0 14.6-12 26.6-26.6 26.6L376.2 744.6 376.2 744.6zM376.2 744.6" />
@@ -12,3 +23,9 @@ export default function IconFontJiesuan (props) {
 }
 
 IconFontJiesuan.displayName = 'IconFontJiesuan';
+
+IconFontJiesuan.defaultProps = {
+    size: 32
+}
+
+export default memo(IconFontJiesuan)

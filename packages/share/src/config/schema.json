@@ -1,0 +1,19 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "icon-font-componentized",
+    "description": "icon-font-componentized 的配置文件",
+    "type": "object",
+    "properties": {
+        "defaultSize": {
+            "type": ["integer", "string"],
+            "description": "默认的图标大小，默认 32px",
+            "default": 32
+        },
+        "classNamePrefix": {
+            "type": "string",
+            "description": "默认的 className 前缀，默认为 icon-font",
+            "default": "icon-font"
+        }
+    },
+    "required": []
+}

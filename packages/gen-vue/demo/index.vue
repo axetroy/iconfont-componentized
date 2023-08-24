@@ -1,26 +1,19 @@
 <template>
     <div>
         <div>
-            <IconFont name="jia" />
-            <IconFont name="anonymous-iconfont" />
-            <IconFont name="briefcase" />
-            <IconFont name="canju-yongcan" />
+            <IconFont name="jia" :size="64" @click="onClick()" />
+            <IconFont name="anonymous-iconfont" size="32px" />
+            <IconFont name="briefcase" size="48" />
+            <IconFont name="canju-yongcan" size="64" />
         </div>
         <div>
-            <IconFontJia></IconFontJia>
+            <IconFontJia @click="onClick()"></IconFontJia>
             <IconFontAnonymousIconfont></IconFontAnonymousIconfont>
             <IconFontBriefcase></IconFontBriefcase>
             <IconFontCanjuYongcan></IconFontCanjuYongcan>
         </div>
     </div>
 </template>
-
-<style>
-svg {
-    width: 20px;
-    height: 20px;
-}
-</style>
 
 <script>
 import IconFont, { IconFontJia, IconFontAnonymousIconfont, IconFontBriefcase, IconFontCanjuYongcan } from "../__tests__/output.spec.1";
@@ -32,6 +25,11 @@ export default {
         IconFontAnonymousIconfont,
         IconFontBriefcase,
         IconFontCanjuYongcan,
+    },
+    methods: {
+        onClick() {
+            alert("click");
+        },
     },
 };
 </script>

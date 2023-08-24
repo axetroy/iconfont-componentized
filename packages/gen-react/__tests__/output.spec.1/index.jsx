@@ -1,6 +1,6 @@
 // generate by iconfont-componentized
 
-import React from 'react';
+import React, { memo } from 'react';
 
 import IconFontJia from "./IconFontJia";
 import IconFontBriefcase from "./IconFontBriefcase";
@@ -14,14 +14,20 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
-export default function IconFont(props) {
+function IconFont(props) {
     switch (props.name) {
-        case 'jia': return <IconFontJia {...props} />;
-        case 'briefcase': return <IconFontBriefcase {...props} />;
-        case 'anonymous-iconfont': return <IconFontAnonymousIconfont {...props} />;
-        case 'jiesuan': return <IconFontJiesuan {...props} />;
-        case 'canju-yongcan': return <IconFontCanjuYongcan {...props} />;
+        case 'jia': return <IconFontJia size={props.size} {...props} />;
+        case 'briefcase': return <IconFontBriefcase size={props.size} {...props} />;
+        case 'anonymous-iconfont': return <IconFontAnonymousIconfont size={props.size} {...props} />;
+        case 'jiesuan': return <IconFontJiesuan size={props.size} {...props} />;
+        case 'canju-yongcan': return <IconFontCanjuYongcan size={props.size} {...props} />;
         default:
-            return <i style="display: none" {...props} />
+            throw new Error(`IconFont's name must one of ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"] but got "${props.name}"`)
     }
 }
+
+IconFont.defaultProps = {
+    size: 32
+}
+
+export default memo(IconFont)

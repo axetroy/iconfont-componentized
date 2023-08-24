@@ -16,6 +16,6 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
-declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName }>;
+declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName, size?: number | string }>;
 
 export default IconFont;

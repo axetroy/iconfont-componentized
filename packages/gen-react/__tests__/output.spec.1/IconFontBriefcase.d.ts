@@ -2,6 +2,6 @@
 
 import React from "react";
 
-declare var IconFontBriefcase: React.FC<React.SVGProps<SVGSVGElement>>;
+declare var IconFontBriefcase: React.FC<React.SVGProps<SVGSVGElement> & { size?: number | string }>;
 
 export default IconFontBriefcase;
