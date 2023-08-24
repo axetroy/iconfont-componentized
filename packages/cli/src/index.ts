@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import DOMComponentGenerator from "@iconfont-componentized/gen-dom";
 import ReactComponentGenerator from "@iconfont-componentized/gen-react";
 import SVGComponentGenerator from "@iconfont-componentized/gen-svg";
