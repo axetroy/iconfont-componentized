@@ -1,0 +1,34 @@
+{
+    "name": "@iconfont-componentized/gen-taro-react",
+    "version": "0.2.1",
+    "main": "dist/index.js",
+    "repository": "https://github.com/axetroy/iconfont-componentized",
+    "license": "ANTI-996",
+    "files": [
+        "dist",
+        "README.md",
+        "CHANGELOG.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "test": "jest",
+        "test:ci": "jest --ci --silent --coverage false",
+        "dev": "tsc -w",
+        "build": "tsc",
+        "serve": "vite serve"
+    },
+    "devDependencies": {
+        "@tarojs/components": "^3.6.14",
+        "@types/react": "^18.2.17",
+        "@types/react-dom": "^18.2.7",
+        "@vitejs/plugin-react": "^4.0.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "vite": "^4.4.8"
+    },
+    "dependencies": {
+        "@iconfont-componentized/parser": "workspace:*",
+        "@iconfont-componentized/share": "workspace:*",
+        "camelcase": "^6.0.0"
+    }
+}

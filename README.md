@@ -9,6 +9,7 @@ IconFont Componentized 是一系列工具，用于生成 IconFont 组件用于�
 ### 支持生成的框架/环境
 
 -   [React](packages/gen-react/__tests__/output.spec.1/)
+-   [Taro-React](packages/gen-taro-react/__tests__/output.spec.1/)
 -   [Vue](packages/gen-vue/__tests__/output.spec.1/)
 -   [WebComponent](packages/gen-web-component/__tests__/output.spec.1/)
 -   [DOM](packages/gen-dom/__tests__/output.spec.1/)
