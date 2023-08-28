@@ -35,27 +35,7 @@ export default class TaroReactComponentGenerator implements ComponentGenerator {
         const defaultSize = this.config.defaultSize;
         const classNamePrefix = this.config.classNamePrefix;
 
-        const svgStr = generateSvgJSX(icon.node, 0, [
-            {
-                type: "variable",
-                key: "width",
-                value: "props.size",
-            },
-            {
-                type: "variable",
-                key: "height",
-                value: "props.size",
-            },
-            {
-                type: "spread",
-                value: "props",
-            },
-            {
-                type: "variable",
-                key: "className",
-                value: `classNames`,
-            },
-        ]);
+        const svgStr = generateSvgJSX(icon.node, 0, []);
 
         const base64 = "data:image/svg+xml;base64," + svgToBase64(svgStr.trim());
 
