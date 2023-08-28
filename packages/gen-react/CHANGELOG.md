@@ -1,5 +1,14 @@
 # @iconfont-componentized/gen-react
 
+## 0.2.7
+
+### Patch Changes
+
+-   1e6037c: bump
+-   Updated dependencies [1e6037c]
+    -   @iconfont-componentized/parser@0.2.7
+    -   @iconfont-componentized/share@0.2.7
+
 ## 0.2.6
 
 ### Patch Changes
