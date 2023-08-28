@@ -174,6 +174,8 @@ ${components
     })
     .join("\n")}
 
+export const names = [${components.map((v) => '"' + v.id + '"')}];
+
 function IconFont(props) {
     switch (props.name) {
 ${components
@@ -184,7 +186,7 @@ ${components
     })
     .join("\n")}
         default:
-            throw new Error(\`IconFont\'s name must one of ${JSON.stringify(components.map((v) => v.id))} but got "\${props.name}"\`)
+            throw new Error(\`IconFont\'s name must one of \${JSON.stringify(names)} but got "\${props.name}"\`)
     }
 }
 `;
@@ -209,6 +211,7 @@ import React from 'react';
 import { ImageProps } from '@tarojs/components';
 
 export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
+export declare var names: Array<string>;
 
 ${components
     .map((v) => {
