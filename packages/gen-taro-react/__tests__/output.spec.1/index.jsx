@@ -7,25 +7,27 @@ import IconFontBriefcase from "./IconFontBriefcase";
 import IconFontAnonymousIconfont from "./IconFontAnonymousIconfont";
 import IconFontJiesuan from "./IconFontJiesuan";
 import IconFontCanjuYongcan from "./IconFontCanjuYongcan";
-import shared from "./shared";
+import share from "./share";
 
 export { IconFontJia };
 export { IconFontBriefcase };
 export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
-export { shared };
+export { share };
+
+export const names = ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan","share"];
 
 function IconFont(props) {
     switch (props.name) {
-        case 'jia': return <IconFontJia size={props.size} {...props} />;
-        case 'briefcase': return <IconFontBriefcase size={props.size} {...props} />;
-        case 'anonymous-iconfont': return <IconFontAnonymousIconfont size={props.size} {...props} />;
-        case 'jiesuan': return <IconFontJiesuan size={props.size} {...props} />;
-        case 'canju-yongcan': return <IconFontCanjuYongcan size={props.size} {...props} />;
-        case 'share': return <shared size={props.size} {...props} />;
+        case 'jia': return <IconFontJia {...props} />;
+        case 'briefcase': return <IconFontBriefcase {...props} />;
+        case 'anonymous-iconfont': return <IconFontAnonymousIconfont {...props} />;
+        case 'jiesuan': return <IconFontJiesuan {...props} />;
+        case 'canju-yongcan': return <IconFontCanjuYongcan {...props} />;
+        case 'share': return <share {...props} />;
         default:
-            throw new Error(`IconFont's name must one of ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan","share"] but got "${props.name}"`)
+            throw new Error(`IconFont's name must one of ${JSON.stringify(names)} but got "${props.name}"`)
     }
 }
 
