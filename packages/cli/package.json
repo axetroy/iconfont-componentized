@@ -1,6 +1,6 @@
 {
     "name": "@iconfont-componentized/cli",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "bin": {
         "iconfont-componentized": "./dist/index.js"
     },

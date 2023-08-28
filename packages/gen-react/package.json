@@ -1,6 +1,6 @@
 {
     "name": "@iconfont-componentized/gen-react",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "main": "dist/index.js",
     "repository": "https://github.com/axetroy/iconfont-componentized",
     "license": "ANTI-996",
