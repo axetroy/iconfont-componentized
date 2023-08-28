@@ -1,5 +1,11 @@
 # @iconfont-componentized/parser
 
+## 0.2.5
+
+### Patch Changes
+
+-   ad5a07f: 0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
