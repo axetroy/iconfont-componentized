@@ -87,7 +87,7 @@ ${componentName}.defaultProps = {
 import React from "react";
 import { ImageProps } from '@tarojs/components';
 
-declare var ${componentName}: React.FC<ImageProps & { size?: number | string }>;
+declare var ${componentName}: React.FC<Omit<ImageProps, "src"> & { size?: number | string }>;
 
 export default ${componentName};
 `;
@@ -201,7 +201,7 @@ ${components
     })
     .join("\n")}
 
-declare var IconFont: React.FC<ImageProps & { name: IconFontName, size?: number | string }>;
+declare var IconFont: React.FC<Omit<ImageProps, "src"> & { name: IconFontName, size?: number | string }>;
 
 export default IconFont;
 `;
