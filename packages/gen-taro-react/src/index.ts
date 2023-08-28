@@ -57,7 +57,7 @@ export default class TaroReactComponentGenerator implements ComponentGenerator {
             },
         ]);
 
-        const base64 = "data:image/svg+xml;base64," + svgToBase64(svgToBase64(svgStr.trim()));
+        const base64 = "data:image/svg+xml;base64," + svgToBase64(svgStr.trim());
 
         let componentContent = `${header}
 import React, { memo, useMemo } from 'react';
