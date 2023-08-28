@@ -1,6 +1,11 @@
 // generate by iconfont-componentized
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect } from 'react';
 import { Image } from '@tarojs/components';
+
+import { svgToBase64, generateSvgJSX } from './share';
+
+let node;
+let count = 0;
 
 function IconFontCanjuYongcan (props) {
     const classNames = useMemo(() => {
@@ -14,7 +19,11 @@ function IconFontCanjuYongcan (props) {
     }, [props.className]);
 
     const src = useMemo(() => {
-        return "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPXtwcm9wcy5zaXplfSBoZWlnaHQ9e3Byb3BzLnNpemV9IHsuLi5wcm9wc30gY2xhc3NOYW1lPXtjbGFzc05hbWVzfT4KICAgIDxwYXRoIGQ9Ik0zNTEuNzQ3MDExIDI4Mi42NzUwNTFoNjEuNjkxOTk2bDE0LjE2MTk5OS0yNjIuOTU2OTgyaDQ2LjUxOTk5N1YyMTYuOTQwMDU1YzAgMzUuMTU4OTk4IDMuNzIzIDc3LjMxMjk5NS01LjA1NiAxMDUuMTc5OTkzLTEyLjk3NDk5OSA0MS4xOTA5OTctNTIuODM5OTk2IDc4LjM3NTk5NS05NS4wNjc5OTQgOTAuMDEwOTk0djU3Ny40ODY5NmMtMzYuNDc3OTk4IDI4LjYxMjk5OC01NC4yMDk5OTYgMjYuNTEyOTk4LTkxLjAyMDk5MyAwdi01NzcuNDg5OTZMMjQ3LjU4MDAxOCAzOTcuOTcwMDQzYy0yMS43Mzk5OTktOS4zOTE5OTktNDMuMDEwOTk3LTIyLjkwMzk5OC01NC42MTU5OTYtNDIuNDc3OTk3LTE2LjM0Nzk5OS0yNy41Njk5OTgtMTQuMTU0OTk5LTcyLjE1Mzk5NS0xNC4xNTQ5OTktMTE2LjMwNDk5MlYxOS43MjIwNjloNDQuNDkzOTk3bDIxLjIzOTk5OCAyNjIuOTUyOTgyaDUyLjU5Mzk5N2w3LjA3NTk5OS0yNjkuMDIyOTgyIDQyLjQ3Nzk5NyAxLjAxMyA1LjA1NiAyNjguMDA5OTgyek01OTcuNTA4OTk0IDEuNTE3MDdjMTguNTE2OTk5LTAuMjI2IDExOS4xNzA5OTItNC4zNDMgMTI2LjQxNjk5MiAyLjAyMyAyMi4zNjk5OTggMTkuNDk3OTk5IDM0LjEzMTk5OCA1My40ODY5OTYgNDkuNTU2OTk2IDc5Ljg5Njk5NCAzMC45Nzk5OTggNTMuMDM5OTk2IDQ5Ljk5OTk5NyAxMTYuOTMwOTkyIDY0LjcyNDk5NiAxODYuMDg5OTg4bDYuMDY5OTk5IDYxLjY5MDk5NSAxLjAxMyA2NS43Mzg5OTZjLTUgMjkuOTIyOTk4LTkuMDEyOTk5IDU5LjYxMTk5Ni0xMy4xNDg5OTkgODYuOTc0OTk0aC0xMDkuMjI5OTkydjU0MC4wNjQ5NjNINTk3LjUwOTk5NFYxLjUxNDA3eiIgLz4KPC9zdmc+"
+        node = node || {"name":"svg","type":"element","value":"","parent":null,"attributes":{"id":"icon-canju-yongcan","viewBox":"0 0 1024 1024"},"children":[{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M351.747011 282.675051h61.691996l14.161999-262.956982h46.519997V216.940055c0 35.158998 3.723 77.312995-5.056 105.179993-12.974999 41.190997-52.839996 78.375995-95.067994 90.010994v577.48696c-36.477998 28.612998-54.209996 26.512998-91.020993 0v-577.48996L247.580018 397.970043c-21.739999-9.391999-43.010997-22.903998-54.615996-42.477997-16.347999-27.569998-14.154999-72.153995-14.154999-116.304992V19.722069h44.493997l21.239998 262.952982h52.593997l7.075999-269.022982 42.477997 1.013 5.056 268.009982zM597.508994 1.51707c18.516999-0.226 119.170992-4.343 126.416992 2.023 22.369998 19.497999 34.131998 53.486996 49.556996 79.896994 30.979998 53.039996 49.999997 116.930992 64.724996 186.089988l6.069999 61.690995 1.013 65.738996c-5 29.922998-9.012999 59.611996-13.148999 86.974994h-109.229992v540.064963H597.509994V1.51407z"},"children":[]}]}; // 避免大量使用组件造成的重复内存申请
+
+        const svgStr = generateSvgJSX(node, 0, [{ type: "normal", key: "fill", value: "red" }]);
+
+        return svgToBase64(svgStr);
     }, [])
 
     const styles = useMemo(() => {
@@ -24,6 +33,18 @@ function IconFontCanjuYongcan (props) {
             ...(props.style || {})
         }
     }, [props.size, props.style])
+
+    useEffect(() => {
+        count+=1;
+
+        return () => {
+            count-=1;
+
+            if (count === 0) {
+                node = null;
+            }
+        }
+    }, [])
 
     return <Image className={classNames} {...props} style={styles} src={src} />
 }

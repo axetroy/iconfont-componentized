@@ -1,6 +1,11 @@
 // generate by iconfont-componentized
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect } from 'react';
 import { Image } from '@tarojs/components';
+
+import { svgToBase64, generateSvgJSX } from './share';
+
+let node;
+let count = 0;
 
 function IconFontJiesuan (props) {
     const classNames = useMemo(() => {
@@ -14,7 +19,11 @@ function IconFontJiesuan (props) {
     }, [props.className]);
 
     const src = useMemo(() => {
-        return "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPXtwcm9wcy5zaXplfSBoZWlnaHQ9e3Byb3BzLnNpemV9IHsuLi5wcm9wc30gY2xhc3NOYW1lPXtjbGFzc05hbWVzfT4KICAgIDxwYXRoIGQ9Ik0zODMgODczLjRjLTI4LjggMC01Mi40LTIzLjYtNTIuNC01Mi40IDAtMjguOCAyMy42LTUyLjQgNTIuNC01Mi40IDI5IDAgNTIuNCAyMy42IDUyLjQgNTIuNEM0MzUuNCA4NTAgNDExLjggODczLjQgMzgzIDg3My40TDM4MyA4NzMuNHpNMzgzIDg3My40IiAvPgogICAgPHBhdGggZD0iTTc0My42IDg3My40Yy0yOSAwLTUyLjQtMjMuNi01Mi40LTUyLjQgMC0yOC44IDIzLjYtNTIuNCA1Mi40LTUyLjQgMjkgMCA1Mi40IDIzLjYgNTIuNCA1Mi40Qzc5NiA4NTAgNzcyLjQgODczLjQgNzQzLjYgODczLjRMNzQzLjYgODczLjR6TTc0My42IDg3My40IiAvPgogICAgPHBhdGggZD0iTTM3Ni4yIDc0NC42Yy0zNy42IDAtNzAuNi0yOS42LTc1LjItNjcuNmwtNDMuNi0zMDcuNC0yNC44LTE0NGMtMS40LTExLjYtMTIuMi0yMi0yMy4yLTIyTDE3Ni40IDIwMy42Yy0xNC42IDAtMjYuNi0xMi0yNi42LTI2LjYgMC0xNC42IDEyLTI2LjYgMjYuNi0yNi42bDMyLjggMGMzOCAwIDcxLjQgMjkuNiA3NiA2Ny40bDI0LjggMTQzLjRMMzU0IDY3MC4yYzEuNCAxMS4yIDExLjggMjEuMiAyMi4yIDIxLjJsNDE4LjQgMGMxNC42IDAgMjYuNiAxMiAyNi42IDI2LjYgMCAxNC42LTEyIDI2LjYtMjYuNiAyNi42TDM3Ni4yIDc0NC42IDM3Ni4yIDc0NC42ek0zNzYuMiA3NDQuNiIgLz4KICAgIDxwYXRoIGQ9Ik00MDguNCA2NDEuNmMtMTMuOCAwLTI1LjYtMTAuOC0yNi42LTI0LjYtMC42LTcgMS44LTE0IDYuNC0xOS40IDQuNi01LjQgMTEtOC42IDE4LjItOS4ybDM0OS42LTI1LjhjMTIgMCAyMi42LTkuMiAyNC0yMC44bDQwLjYtMjMyYzEtOC44LTEuNC0xOC02LjItMjMuNC0zLjItMy42LTctNS40LTExLjYtNS40bC00NDYgMGMtMTQuOCAwLTI2LjYtMTItMjYuNi0yNi42IDAtMTQuNiAxMi0yNi42IDI2LjYtMjYuNmw0NDYgMGMyMCAwIDM4LjIgOC4yIDUxLjYgMjMuNCAxNS4yIDE3LjIgMjIuMiA0MS40IDE5LjIgNjYuNGwtNDAuNiAyMzJjLTIuMiAxOC0xMS4yIDM0LjYtMjUgNDctMTQgMTIuNC0zMS42IDE5LjQtNDkuOCAxOS40bC0zNDcuNiAyNS42TDQwOC40IDY0MS42IDQwOC40IDY0MS42ek00MDguNCA2NDEuNiIgLz4KPC9zdmc+"
+        node = node || {"name":"svg","type":"element","value":"","parent":null,"attributes":{"id":"icon-jiesuan","viewBox":"0 0 1024 1024"},"children":[{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M383 873.4c-28.8 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C435.4 850 411.8 873.4 383 873.4L383 873.4zM383 873.4"},"children":[]},{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M743.6 873.4c-29 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C796 850 772.4 873.4 743.6 873.4L743.6 873.4zM743.6 873.4"},"children":[]},{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M376.2 744.6c-37.6 0-70.6-29.6-75.2-67.6l-43.6-307.4-24.8-144c-1.4-11.6-12.2-22-23.2-22L176.4 203.6c-14.6 0-26.6-12-26.6-26.6 0-14.6 12-26.6 26.6-26.6l32.8 0c38 0 71.4 29.6 76 67.4l24.8 143.4L354 670.2c1.4 11.2 11.8 21.2 22.2 21.2l418.4 0c14.6 0 26.6 12 26.6 26.6 0 14.6-12 26.6-26.6 26.6L376.2 744.6 376.2 744.6zM376.2 744.6"},"children":[]},{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M408.4 641.6c-13.8 0-25.6-10.8-26.6-24.6-0.6-7 1.8-14 6.4-19.4 4.6-5.4 11-8.6 18.2-9.2l349.6-25.8c12 0 22.6-9.2 24-20.8l40.6-232c1-8.8-1.4-18-6.2-23.4-3.2-3.6-7-5.4-11.6-5.4l-446 0c-14.8 0-26.6-12-26.6-26.6 0-14.6 12-26.6 26.6-26.6l446 0c20 0 38.2 8.2 51.6 23.4 15.2 17.2 22.2 41.4 19.2 66.4l-40.6 232c-2.2 18-11.2 34.6-25 47-14 12.4-31.6 19.4-49.8 19.4l-347.6 25.6L408.4 641.6 408.4 641.6zM408.4 641.6"},"children":[]}]}; // 避免大量使用组件造成的重复内存申请
+
+        const svgStr = generateSvgJSX(node, 0, [{ type: "normal", key: "fill", value: "red" }]);
+
+        return svgToBase64(svgStr);
     }, [])
 
     const styles = useMemo(() => {
@@ -24,6 +33,18 @@ function IconFontJiesuan (props) {
             ...(props.style || {})
         }
     }, [props.size, props.style])
+
+    useEffect(() => {
+        count+=1;
+
+        return () => {
+            count-=1;
+
+            if (count === 0) {
+                node = null;
+            }
+        }
+    }, [])
 
     return <Image className={classNames} {...props} style={styles} src={src} />
 }

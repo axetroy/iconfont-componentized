@@ -1,27 +1,10 @@
 import { Icon, parseFromURL } from "@iconfont-componentized/parser";
-import { Component, ComponentGenerator, Config, generateSvgJSX, GeneratorOptions, WriteConstructor } from "@iconfont-componentized/share";
+import { Component, ComponentGenerator, Config, GeneratorOptions, WriteConstructor } from "@iconfont-componentized/share";
 import camelcase from "camelcase";
+import fs from "fs";
+import path from "path";
 
 const header = `// generate by iconfont-componentized`;
-
-function stringToByteArray(str: string) {
-    const byteArray: number[] = [];
-    for (let i = 0; i < str.length; i++) {
-        byteArray.push(str.charCodeAt(i) & 0xff);
-    }
-    return byteArray;
-}
-
-function byteArrayToBase64(byteArray: number[]) {
-    const binaryString = String.fromCharCode.apply(null, byteArray);
-    return btoa(binaryString);
-}
-
-function svgToBase64(svgString: string) {
-    const svgBytes = stringToByteArray(svgString);
-    const base64Encoded = byteArrayToBase64(svgBytes);
-    return base64Encoded;
-}
 
 export default class TaroReactComponentGenerator implements ComponentGenerator {
     constructor(
@@ -35,13 +18,15 @@ export default class TaroReactComponentGenerator implements ComponentGenerator {
         const defaultSize = this.config.defaultSize;
         const classNamePrefix = this.config.classNamePrefix;
 
-        const svgStr = generateSvgJSX(icon.node, 0, []);
-
-        const base64 = "data:image/svg+xml;base64," + svgToBase64(svgStr.trim());
-
         let componentContent = `${header}
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect } from 'react';
+import Taro from '@tarojs/taro'
 import { Image } from '@tarojs/components';
+
+import { svgToBase64, generateSvgJSX } from './share';
+
+let node;
+let referenceCount = 0;
 
 function ${componentName} (props) {
     const classNames = useMemo(() => {
@@ -55,18 +40,38 @@ function ${componentName} (props) {
     }, [props.className]);
 
     const src = useMemo(() => {
-        return "${base64}"
-    }, [])
+        // 避免大量使用组件造成的重复内存申请
+        // 这么做只是为了降低内存使用量
+        node = node || ${JSON.stringify(icon.node)};
+
+        const svgStr = generateSvgJSX(node, 0, [props.color ? { type: "normal", key: "fill", value: props.color } : undefined].filter(v=>v));
+
+        return "data:image/svg+xml;base64," + svgToBase64(svgStr);
+    }, [props.color])
 
     const styles = useMemo(() => {
+        const size = typeof props.size === "number" ? Taro.pxTransform(props.size) : props.size
+
         return {
-            width: props.size,
-            height: props.size,
+            width: size,
+            height: size,
             ...(props.style || {})
         }
     }, [props.size, props.style])
 
-    return <Image className={classNames} {...props} style={styles} src={src} />
+    useEffect(() => {
+        referenceCount+=1;
+
+        return () => {
+            referenceCount-=1;
+
+            if (referenceCount === 0) {
+                node = null; // 释放内存
+            }
+        }
+    }, [])
+
+    return <Image lazyLoad {...props} className={classNames} style={styles} src={src} />
 }
 
 ${componentName}.displayName = '${componentName}';
@@ -87,7 +92,7 @@ ${componentName}.defaultProps = {
 import React from "react";
 import { ImageProps } from '@tarojs/components';
 
-declare var ${componentName}: React.FC<Omit<ImageProps, "src"> & { size?: number | string }>;
+declare var ${componentName}: React.FC<Omit<ImageProps, "src"> & { size?: number | string, color?: string }>;
 
 export default ${componentName};
 `;
@@ -109,6 +114,22 @@ export default ${componentName};
     }
     generates(icons: Icon[]): Component[] {
         const components = icons.map((v) => this.generate(v));
+
+        // generate share file
+        components.push({
+            id: "share",
+            componentName: "share",
+            files: [
+                {
+                    filepath: "share.js",
+                    content: fs.readFileSync(path.join(__dirname, "share", "share.js"), { encoding: "utf-8" }),
+                },
+                {
+                    filepath: "share.d.ts",
+                    content: fs.readFileSync(path.join(__dirname, "share", "share.d.ts"), { encoding: "utf-8" }),
+                },
+            ],
+        });
 
         // generate index file
         components.push({
@@ -159,7 +180,7 @@ ${components
     .map((v) => {
         const indentSpace = " ".repeat(8);
 
-        return `${indentSpace}case '${v.id}': return <${v.componentName} size={props.size} {...props} />;`;
+        return `${indentSpace}case '${v.id}': return <${v.componentName} {...props} />;`;
     })
     .join("\n")}
         default:
@@ -201,7 +222,7 @@ ${components
     })
     .join("\n")}
 
-declare var IconFont: React.FC<Omit<ImageProps, "src"> & { name: IconFontName, size?: number | string }>;
+declare var IconFont: React.FC<Omit<ImageProps, "src"> & { name: IconFontName, size?: number | string, color?: string }>;
 
 export default IconFont;
 `;

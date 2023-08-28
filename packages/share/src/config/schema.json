@@ -13,6 +13,10 @@
             "type": "string",
             "description": "默认的 className 前缀，默认为 icon-font",
             "default": "icon-font"
+        },
+        "color": {
+            "type": "string",
+            "description": "默认的图标颜色，仅适用于单色图标"
         }
     },
     "required": []

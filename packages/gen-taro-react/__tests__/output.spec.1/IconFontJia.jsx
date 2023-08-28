@@ -1,6 +1,11 @@
 // generate by iconfont-componentized
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect } from 'react';
 import { Image } from '@tarojs/components';
+
+import { svgToBase64, generateSvgJSX } from './share';
+
+let node;
+let count = 0;
 
 function IconFontJia (props) {
     const classNames = useMemo(() => {
@@ -14,7 +19,11 @@ function IconFontJia (props) {
     }, [props.className]);
 
     const src = useMemo(() => {
-        return "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPXtwcm9wcy5zaXplfSBoZWlnaHQ9e3Byb3BzLnNpemV9IHsuLi5wcm9wc30gY2xhc3NOYW1lPXtjbGFzc05hbWVzfT4KICAgIDxwYXRoIGQ9Ik01MTQuMDQ4IDYyLjQ2NHE5My4xODQgMCAxNzUuNjE2IDM1LjMyOHQxNDMuODcyIDk2Ljc2OCA5Ni43NjggMTQzLjg3MiAzNS4zMjggMTc1LjYxNnEwIDk0LjIwOC0zNS4zMjggMTc2LjEyOHQtOTYuNzY4IDE0My4zNi0xNDMuODcyIDk2Ljc2OC0xNzUuNjE2IDM1LjMyOHEtOTQuMjA4IDAtMTc2LjY0LTM1LjMyOHQtMTQzLjg3Mi05Ni43NjgtOTYuNzY4LTE0My4zNi0zNS4zMjgtMTc2LjEyOHEwLTkzLjE4NCAzNS4zMjgtMTc1LjYxNnQ5Ni43NjgtMTQzLjg3MiAxNDMuODcyLTk2Ljc2OCAxNzYuNjQtMzUuMzI4ek03NzIuMDk2IDU3Ni41MTJxMjYuNjI0IDAgNDUuMDU2LTE4Ljk0NHQxOC40MzItNDUuNTY4LTE4LjQzMi00NS4wNTYtNDUuMDU2LTE4LjQzMmwtMTkyLjUxMiAwIDAtMTkyLjUxMnEwLTI2LjYyNC0xOC45NDQtNDUuNTY4dC00NS41NjgtMTguOTQ0LTQ1LjA1NiAxOC45NDQtMTguNDMyIDQ1LjU2OGwwIDE5Mi41MTItMTkyLjUxMiAwcS0yNi42MjQgMC00NS4wNTYgMTguNDMydC0xOC40MzIgNDUuMDU2IDE4LjQzMiA0NS41NjggNDUuMDU2IDE4Ljk0NGwxOTIuNTEyIDAgMCAxOTEuNDg4cTAgMjYuNjI0IDE4LjQzMiA0NS41Njh0NDUuMDU2IDE4Ljk0NCA0NS41NjgtMTguOTQ0IDE4Ljk0NC00NS41NjhsMC0xOTEuNDg4IDE5Mi41MTIgMHoiIC8+Cjwvc3ZnPg=="
+        node = node || {"name":"svg","type":"element","value":"","parent":null,"attributes":{"id":"icon-jia","viewBox":"0 0 1024 1024"},"children":[{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M514.048 62.464q93.184 0 175.616 35.328t143.872 96.768 96.768 143.872 35.328 175.616q0 94.208-35.328 176.128t-96.768 143.36-143.872 96.768-175.616 35.328q-94.208 0-176.64-35.328t-143.872-96.768-96.768-143.36-35.328-176.128q0-93.184 35.328-175.616t96.768-143.872 143.872-96.768 176.64-35.328zM772.096 576.512q26.624 0 45.056-18.944t18.432-45.568-18.432-45.056-45.056-18.432l-192.512 0 0-192.512q0-26.624-18.944-45.568t-45.568-18.944-45.056 18.944-18.432 45.568l0 192.512-192.512 0q-26.624 0-45.056 18.432t-18.432 45.056 18.432 45.568 45.056 18.944l192.512 0 0 191.488q0 26.624 18.432 45.568t45.056 18.944 45.568-18.944 18.944-45.568l0-191.488 192.512 0z"},"children":[]}]}; // 避免大量使用组件造成的重复内存申请
+
+        const svgStr = generateSvgJSX(node, 0, [{ type: "normal", key: "fill", value: "red" }]);
+
+        return svgToBase64(svgStr);
     }, [])
 
     const styles = useMemo(() => {
@@ -24,6 +33,18 @@ function IconFontJia (props) {
             ...(props.style || {})
         }
     }, [props.size, props.style])
+
+    useEffect(() => {
+        count+=1;
+
+        return () => {
+            count-=1;
+
+            if (count === 0) {
+                node = null;
+            }
+        }
+    }, [])
 
     return <Image className={classNames} {...props} style={styles} src={src} />
 }

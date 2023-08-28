@@ -1,6 +1,11 @@
 // generate by iconfont-componentized
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useEffect } from 'react';
 import { Image } from '@tarojs/components';
+
+import { svgToBase64, generateSvgJSX } from './share';
+
+let node;
+let count = 0;
 
 function IconFontAnonymousIconfont (props) {
     const classNames = useMemo(() => {
@@ -14,7 +19,11 @@ function IconFontAnonymousIconfont (props) {
     }, [props.className]);
 
     const src = useMemo(() => {
-        return "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPXtwcm9wcy5zaXplfSBoZWlnaHQ9e3Byb3BzLnNpemV9IHsuLi5wcm9wc30gY2xhc3NOYW1lPXtjbGFzc05hbWVzfT4KICAgIDxwYXRoIGQ9Ik01MTIuMDE3OTA4IDEyNi43NTQ4OTJjLTIxMC43MTgxODkgMC0zODEuNTI3NDM2IDE3Mi4wMTk4MTktMzgxLjUyNzQzNiAzODQuMjIxODAyczE3MC44MDkyNDcgMzg0LjIyMTgwMiAzODEuNTI3NDM2IDM4NC4yMjE4MDIgMzgxLjU0MzgwOS0xNzIuMDE5ODE5IDM4MS41NDM4MDktMzg0LjIyMTgwMlM3MjIuNzM2MDk3IDEyNi43NTQ4OTIgNTEyLjAxNzkwOCAxMjYuNzU0ODkyek03MDIuNzk5MDIyIDUyMi4wNjMxOTNjMCAxNi4zMzgxMDctMTMuMTQ5NDg1IDI5LjU3MzU0OS0yOS4zNTI1MTUgMjkuNTczNTQ5TDM1MC42MDY3MDUgNTUxLjYzNjc0MmMtMTYuMjAyMDA3IDAtMjkuMzM1MTE5LTEzLjIzNTQ0Mi0yOS4zMzUxMTktMjkuNTczNTQ5bDAtMjkuNTM5NzhjMC0xNi4zMzkxMyAxMy4xMzIwODgtMjkuNTczNTQ5IDI5LjMzNTExOS0yOS41NzM1NDlsMzIyLjgzOTgwMyAwYzE2LjIwMzAzIDAgMjkuMzUyNTE1IDEzLjIzNTQ0MiAyOS4zNTI1MTUgMjkuNTczNTQ5TDcwMi43OTkwMjIgNTIyLjA2MzE5M3oiIC8+Cjwvc3ZnPg=="
+        node = node || {"name":"svg","type":"element","value":"","parent":null,"attributes":{"id":"icon-anonymous-iconfont","viewBox":"0 0 1024 1024"},"children":[{"name":"path","type":"element","value":"","parent":null,"attributes":{"d":"M512.017908 126.754892c-210.718189 0-381.527436 172.019819-381.527436 384.221802s170.809247 384.221802 381.527436 384.221802 381.543809-172.019819 381.543809-384.221802S722.736097 126.754892 512.017908 126.754892zM702.799022 522.063193c0 16.338107-13.149485 29.573549-29.352515 29.573549L350.606705 551.636742c-16.202007 0-29.335119-13.235442-29.335119-29.573549l0-29.53978c0-16.33913 13.132088-29.573549 29.335119-29.573549l322.839803 0c16.20303 0 29.352515 13.235442 29.352515 29.573549L702.799022 522.063193z"},"children":[]}]}; // 避免大量使用组件造成的重复内存申请
+
+        const svgStr = generateSvgJSX(node, 0, [{ type: "normal", key: "fill", value: "red" }]);
+
+        return svgToBase64(svgStr);
     }, [])
 
     const styles = useMemo(() => {
@@ -24,6 +33,18 @@ function IconFontAnonymousIconfont (props) {
             ...(props.style || {})
         }
     }, [props.size, props.style])
+
+    useEffect(() => {
+        count+=1;
+
+        return () => {
+            count-=1;
+
+            if (count === 0) {
+                node = null;
+            }
+        }
+    }, [])
 
     return <Image className={classNames} {...props} style={styles} src={src} />
 }
