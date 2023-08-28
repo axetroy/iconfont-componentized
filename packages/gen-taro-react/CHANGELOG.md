@@ -1,5 +1,13 @@
 # @iconfont-componentized/gen-taro-react
 
+## 0.2.8
+
+### Patch Changes
+
+-   Updated dependencies [b86a11d]
+    -   @iconfont-componentized/parser@0.2.8
+    -   @iconfont-componentized/share@0.2.8
+
 ## 0.2.6
 
 ### Patch Changes
