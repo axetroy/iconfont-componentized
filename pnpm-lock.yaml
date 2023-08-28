@@ -83,6 +83,9 @@ importers:
       '@iconfont-componentized/gen-svg':
         specifier: workspace:*
         version: link:../gen-svg
+      '@iconfont-componentized/gen-taro-react':
+        specifier: workspace:*
+        version: link:../gen-taro-react
       '@iconfont-componentized/gen-vue':
         specifier: workspace:*
         version: link:../gen-vue

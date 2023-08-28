@@ -23,6 +23,7 @@
     "dependencies": {
         "@iconfont-componentized/gen-dom": "workspace:*",
         "@iconfont-componentized/gen-react": "workspace:*",
+        "@iconfont-componentized/gen-taro-react": "workspace:*",
         "@iconfont-componentized/gen-svg": "workspace:*",
         "@iconfont-componentized/gen-vue": "workspace:*",
         "@iconfont-componentized/gen-web-component": "workspace:*",

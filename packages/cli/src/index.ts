@@ -2,6 +2,7 @@
 import DOMComponentGenerator from "@iconfont-componentized/gen-dom";
 import ReactComponentGenerator from "@iconfont-componentized/gen-react";
 import SVGComponentGenerator from "@iconfont-componentized/gen-svg";
+import TaroReactComponentGenerator from "@iconfont-componentized/gen-taro-react";
 import VueComponentGenerator from "@iconfont-componentized/gen-vue";
 import WebComponentGenerator from "@iconfont-componentized/gen-web-component";
 import { parseFromURL } from "@iconfont-componentized/parser";
@@ -17,7 +18,7 @@ function printHelp(exitCode: number = 0) {
 
 [options]:
     --url          Url of iconfont symbol for generate icon component.
-    --target       The generate target. multiple targets split with ','. support 'react', 'vue', 'svg', 'web-component'
+    --target       The generate target. multiple targets split with ','. Supports 'react', 'vue', 'svg', 'web-component', 'dom', 'taro-react'
     --output       The output directory. defaults to '$PWD/components'
     --config       The config file path of componentized.
     -h,--help      Print help
@@ -46,7 +47,7 @@ if (argv["h"] || argv["help"]) {
 
 const symbolURL = argv["url"];
 const outputDir = argv["output"] ?? path.join(process.cwd(), "components");
-const targetStr = (argv["target"] as string) ?? "react,vue,svg,web-component,dom";
+const targetStr = (argv["target"] as string) ?? "react,vue,svg,web-component,dom,taro-react";
 const configFilePath = (argv["config"] as string) ?? "iconfont-componentized.json";
 const targets = targetStr.split(",").map((v) => v.trim());
 
@@ -57,6 +58,8 @@ function getGenerator(target: string, config: Config) {
         case "react":
             gen = new ReactComponentGenerator(DiskWriter, config);
             break;
+        case "taro-react":
+            gen = new TaroReactComponentGenerator(DiskWriter, config);
         case "vue":
             gen = new VueComponentGenerator(DiskWriter, config);
             break;
