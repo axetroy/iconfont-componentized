@@ -1,5 +1,13 @@
 # @iconfont-componentized/share
 
+## 0.2.5
+
+### Patch Changes
+
+-   ad5a07f: 0.2.5
+-   Updated dependencies [ad5a07f]
+    -   @iconfont-componentized/parser@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
