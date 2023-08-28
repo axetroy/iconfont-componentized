@@ -60,6 +60,7 @@ function getGenerator(target: string, config: Config) {
             break;
         case "taro-react":
             gen = new TaroReactComponentGenerator(DiskWriter, config);
+            break
         case "vue":
             gen = new VueComponentGenerator(DiskWriter, config);
             break;
