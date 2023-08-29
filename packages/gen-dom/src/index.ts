@@ -129,13 +129,13 @@ ${components
 
 export const names = [${components.map((v) => '"' + v.id + '"')}];
 
-export default function IconFont({ name, size, className } = {}) {
+export default function IconFont(props = {}) {
     switch (name) {
 ${components
     .map((v) => {
         const indentSpace = " ".repeat(8);
 
-        return `${indentSpace}case '${v.id}': return ${v.componentName}({ size, className });`;
+        return `${indentSpace}case '${v.id}': return ${v.componentName}(props);`;
     })
     .join("\n")}
         default:
