@@ -3,6 +3,7 @@
 import React from 'react';
 
 export type IconFontName = 'jia' | 'briefcase' | 'anonymous-iconfont' | 'jiesuan' | 'canju-yongcan';
+export declare var names: Array<string>;
 
 import IconFontJia from './IconFontJia';
 import IconFontBriefcase from './IconFontBriefcase';
@@ -16,6 +17,6 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
-declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName, size?: number | string }>;
+declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName, size?: number | string, color?: string }>;
 
 export default IconFont;

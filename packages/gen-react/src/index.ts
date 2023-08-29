@@ -28,6 +28,11 @@ export default class ReactComponentGenerator implements ComponentGenerator {
                 value: "props.size",
             },
             {
+                type: "variable",
+                key: "fill",
+                value: `props.color`,
+            },
+            {
                 type: "spread",
                 value: "props",
             },
@@ -35,6 +40,11 @@ export default class ReactComponentGenerator implements ComponentGenerator {
                 type: "variable",
                 key: "className",
                 value: `classNames`,
+            },
+            {
+                type: "variable",
+                key: "style",
+                value: `styles`,
             },
         ]);
 
@@ -51,6 +61,16 @@ function ${componentName} (props) {
 
         return classNameParts.join(' ');
     }, [props.className]);
+
+    const styles = useMemo(() => {
+        const size = props.size;
+
+        return {
+            width: size,
+            height: size,
+            ...(props.style || {})
+        }
+    }, [props.size, props.style])
 
     return (
 ${svgStr}
@@ -74,7 +94,7 @@ ${componentName}.defaultProps = {
 
 import React from "react";
 
-declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement> & { size?: number | string }>;
+declare var ${componentName}: React.FC<React.SVGProps<SVGSVGElement> & { size?: number | string, color?: string }>;
 
 export default ${componentName};
 `;
@@ -140,17 +160,19 @@ ${components
     })
     .join("\n")}
 
+export const names = [${components.map((v) => '"' + v.id + '"')}];
+
 function IconFont(props) {
     switch (props.name) {
 ${components
     .map((v) => {
         const indentSpace = " ".repeat(8);
 
-        return `${indentSpace}case '${v.id}': return <${v.componentName} size={props.size} {...props} />;`;
+        return `${indentSpace}case '${v.id}': return <${v.componentName} {...props} />;`;
     })
     .join("\n")}
         default:
-            throw new Error(\`IconFont\'s name must one of ${JSON.stringify(components.map((v) => v.id))} but got "\${props.name}"\`)
+            throw new Error(\`IconFont\'s name must one of \${JSON.stringify(names)} but got "\${props.name}"\`)
     }
 }
 `;
@@ -174,6 +196,7 @@ IconFont.defaultProps = {
 import React from 'react';
 
 export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
+export declare var names: Array<string>;
 
 ${components
     .map((v) => {
@@ -187,7 +210,7 @@ ${components
     })
     .join("\n")}
 
-declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName, size?: number | string }>;
+declare var IconFont: React.FC<React.SVGProps<SVGSVGElement> & { name: IconFontName, size?: number | string, color?: string }>;
 
 export default IconFont;
 `;

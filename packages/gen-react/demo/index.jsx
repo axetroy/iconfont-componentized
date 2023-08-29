@@ -12,13 +12,13 @@ root.render(
             <IconFont name="jia" size={16}></IconFont>
             <IconFont name="anonymous-iconfont" size={32}></IconFont>
             <IconFont name="briefcase" style={{ width: 64, height: 64 }}></IconFont>
-            <IconFont name="canju-yongcan" className="icon"></IconFont>
+            <IconFont name="canju-yongcan" className="icon" color="red"></IconFont>
         </div>
         <div>
             <IconFontJia size={16}></IconFontJia>
             <IconFontAnonymousIconfont size={32}></IconFontAnonymousIconfont>
             <IconFontBriefcase style={{ width: 64, height: 64 }}></IconFontBriefcase>
-            <IconFontCanjuYongcan className="icon"></IconFontCanjuYongcan>
+            <IconFontCanjuYongcan className="icon" color="red"></IconFontCanjuYongcan>
         </div>
     </div>,
 );
