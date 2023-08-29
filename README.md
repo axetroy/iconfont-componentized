@@ -27,6 +27,7 @@ npm install @iconfont-componentized/cli -D
 
 ```json
 {
+    "$schema": "https://raw.githubusercontent.com/axetroy/iconfont-componentized/main/packages/share/src/config/schema.json",
     "defaultSize": 32,
     "classNamePrefix": "icon-font"
 }
