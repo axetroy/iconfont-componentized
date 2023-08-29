@@ -40,6 +40,11 @@ export default class VueComponentGenerator implements ComponentGenerator {
                         key: "className",
                         value: "this.classNames",
                     },
+                    {
+                        type: "variable",
+                        key: "fill",
+                        value: "this.color",
+                    },
                 ],
                 listeners: [
                     {
@@ -59,6 +64,9 @@ export default {
         size: {
             type: [String, Number],
             default: ${defaultSize}
+        },
+        color: {
+            type: String
         }
     },
     computed: {
@@ -87,6 +95,8 @@ import { DefineComponent } from 'vue';
 type SvgProps = JSX.IntrinsicElements['svg'];
 
 export interface ${componentName}Props extends SvgProps {
+    size?: number | string;
+    color?: string;
 }
 
 declare const ${componentName}: DefineComponent<${componentName}Props>;
@@ -170,6 +180,8 @@ ${components
     })
     .join("\n")}
 
+export const names = [${components.map((v) => '"' + v.id + '"')}];
+
 export default {
     name: "IconFont",
     components: {
@@ -188,6 +200,9 @@ ${components
         size: {
             type: [String, Number],
             default: ${defaultSize}
+        },
+        color: {
+            type: String
         }
     },
     render(h) {
@@ -213,9 +228,8 @@ ${components
                 ],
                 props: [
                     {
-                        type: "variable",
-                        key: "size",
-                        value: "this.size",
+                        type: "spread",
+                        value: "(this.$props || {})",
                     },
                 ],
                 listeners: [
@@ -241,7 +255,7 @@ ${components
 function generateIndexComponentDeclaration(components: Component[]) {
     return `${header}
 
-import { DefineComponent } from "vue";
+import { Component } from "vue";
 
 ${components
     .map((v) => {
@@ -258,12 +272,13 @@ ${components
 type SvgProps = JSX.IntrinsicElements['svg'];
 
 export type IconNames = ${components.map((v) => `"${v.id}"`).join(" | ")}
+export declare var names: Array<string>;
 
 export interface IconFontProps extends SvgProps {
     name: IconNames
 }
 
-declare const IconFont: DefineComponent<IconFontProps>;
+declare const IconFont: Component<never, never, never, IconFontProps>;
 
 export default IconFont;
 `;

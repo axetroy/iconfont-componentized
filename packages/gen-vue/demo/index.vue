@@ -1,16 +1,16 @@
 <template>
     <div>
         <div>
-            <IconFont name="jia" :size="64" @click="onClick()" />
+            <IconFont name="jia" :size="24" @click="onClick()" />
             <IconFont name="anonymous-iconfont" size="32px" />
             <IconFont name="briefcase" size="48" />
-            <IconFont name="canju-yongcan" size="64" />
+            <IconFont name="canju-yongcan" class="test-class" size="64" color="red" />
         </div>
         <div>
-            <IconFontJia @click="onClick()"></IconFontJia>
-            <IconFontAnonymousIconfont></IconFontAnonymousIconfont>
-            <IconFontBriefcase></IconFontBriefcase>
-            <IconFontCanjuYongcan></IconFontCanjuYongcan>
+            <IconFontJia :size="24" @click="onClick()"></IconFontJia>
+            <IconFontAnonymousIconfont size="32px"></IconFontAnonymousIconfont>
+            <IconFontBriefcase size="48"></IconFontBriefcase>
+            <IconFontCanjuYongcan class="test-class" size="64" color="red"></IconFontCanjuYongcan>
         </div>
     </div>
 </template>

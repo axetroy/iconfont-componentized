@@ -6,6 +6,9 @@ export default {
         size: {
             type: [String, Number],
             default: 32
+        },
+        color: {
+            type: String
         }
     },
     computed: {
@@ -21,7 +24,7 @@ export default {
     },
     render(h) {
         return (
-            h("svg", { "attrs": {"viewBox": "0 0 1024 1024", "xmlns": "http://www.w3.org/2000/svg", ...(this.$attrs || {}), width: this.size, height: this.size, className: this.classNames}, "on": {...(this.$listeners || {})} }, [
+            h("svg", { "attrs": {"viewBox": "0 0 1024 1024", "xmlns": "http://www.w3.org/2000/svg", ...(this.$attrs || {}), width: this.size, height: this.size, className: this.classNames, fill: this.color}, "on": {...(this.$listeners || {})} }, [
                 h("path", { "attrs": {"d": "M383 873.4c-28.8 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C435.4 850 411.8 873.4 383 873.4L383 873.4zM383 873.4"} }),
                 h("path", { "attrs": {"d": "M743.6 873.4c-29 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C796 850 772.4 873.4 743.6 873.4L743.6 873.4zM743.6 873.4"} }),
                 h("path", { "attrs": {"d": "M376.2 744.6c-37.6 0-70.6-29.6-75.2-67.6l-43.6-307.4-24.8-144c-1.4-11.6-12.2-22-23.2-22L176.4 203.6c-14.6 0-26.6-12-26.6-26.6 0-14.6 12-26.6 26.6-26.6l32.8 0c38 0 71.4 29.6 76 67.4l24.8 143.4L354 670.2c1.4 11.2 11.8 21.2 22.2 21.2l418.4 0c14.6 0 26.6 12 26.6 26.6 0 14.6-12 26.6-26.6 26.6L376.2 744.6 376.2 744.6zM376.2 744.6"} }),

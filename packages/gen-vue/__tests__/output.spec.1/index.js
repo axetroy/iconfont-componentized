@@ -12,6 +12,8 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
+export const names = ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"];
+
 export default {
     name: "IconFont",
     components: {
@@ -29,15 +31,18 @@ export default {
         size: {
             type: [String, Number],
             default: 32
+        },
+        color: {
+            type: String
         }
     },
     render(h) {
         switch (this.name) {
-            case "jia": return h("IconFontJia", { "attrs": {...(this.$attrs || {})}, "props": {size: this.size}, "on": {...(this.$listeners || {})} });
-            case "briefcase": return h("IconFontBriefcase", { "attrs": {...(this.$attrs || {})}, "props": {size: this.size}, "on": {...(this.$listeners || {})} });
-            case "anonymous-iconfont": return h("IconFontAnonymousIconfont", { "attrs": {...(this.$attrs || {})}, "props": {size: this.size}, "on": {...(this.$listeners || {})} });
-            case "jiesuan": return h("IconFontJiesuan", { "attrs": {...(this.$attrs || {})}, "props": {size: this.size}, "on": {...(this.$listeners || {})} });
-            case "canju-yongcan": return h("IconFontCanjuYongcan", { "attrs": {...(this.$attrs || {})}, "props": {size: this.size}, "on": {...(this.$listeners || {})} });
+            case "jia": return h("IconFontJia", { "attrs": {...(this.$attrs || {})}, "props": {...(this.$props || {})}, "on": {...(this.$listeners || {})} });
+            case "briefcase": return h("IconFontBriefcase", { "attrs": {...(this.$attrs || {})}, "props": {...(this.$props || {})}, "on": {...(this.$listeners || {})} });
+            case "anonymous-iconfont": return h("IconFontAnonymousIconfont", { "attrs": {...(this.$attrs || {})}, "props": {...(this.$props || {})}, "on": {...(this.$listeners || {})} });
+            case "jiesuan": return h("IconFontJiesuan", { "attrs": {...(this.$attrs || {})}, "props": {...(this.$props || {})}, "on": {...(this.$listeners || {})} });
+            case "canju-yongcan": return h("IconFontCanjuYongcan", { "attrs": {...(this.$attrs || {})}, "props": {...(this.$props || {})}, "on": {...(this.$listeners || {})} });
             default:
                 throw new Error(`IconFont's name must one of ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"] but got "${this.name}"`)
         }
