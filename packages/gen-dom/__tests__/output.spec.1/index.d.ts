@@ -1,6 +1,7 @@
 // generate by iconfont-componentized
 
 export type IconFontName = 'jia' | 'briefcase' | 'anonymous-iconfont' | 'jiesuan' | 'canju-yongcan';
+export declare var names: Array<string>;
 
 import IconFontJia from './IconFontJia';
 import IconFontBriefcase from './IconFontBriefcase';
@@ -14,7 +15,7 @@ export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
 export { IconFontCanjuYongcan };
 
-interface IconFontProps {
+export interface IconFontProps {
     name: IconFontName;
     size?: number | string;
     className?: string;

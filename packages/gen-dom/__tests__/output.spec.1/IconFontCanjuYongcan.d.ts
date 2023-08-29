@@ -3,6 +3,7 @@
 export interface IconFontCanjuYongcanProps {
     size?: number | string;
     className?: string;
+    color?: string;
 }
 
 declare const IconFontCanjuYongcan: (props: IconFontCanjuYongcanProps) => SVGElement;

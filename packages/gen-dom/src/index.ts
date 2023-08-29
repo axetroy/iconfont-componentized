@@ -20,23 +20,28 @@ export default class DOMComponentGenerator implements ComponentGenerator {
             {
                 type: "variable",
                 key: "width",
-                value: `props.size ?? "${defaultSize}"`,
+                value: `size`,
             },
             {
                 type: "variable",
                 key: "height",
-                value: `props.size ?? "${defaultSize}"`,
+                value: `size`,
             },
             {
                 type: "variable",
                 key: "class",
                 value: `classNames`,
             },
+            {
+                type: "variable",
+                key: "fill",
+                value: `props.color`,
+            },
         ]);
 
         const componentContent = `${header}
 
-export default function ${componentName}(props) {
+export default function ${componentName}(props = {}) {
     const classNameParts = ['${classNamePrefix}', '${classNamePrefix}-${icon.id}'];
 
     if (props.className) {
@@ -44,6 +49,8 @@ export default function ${componentName}(props) {
     }
 
     const classNames = classNameParts.join(' ');
+
+    const size = props.size ?? ${typeof defaultSize === "number" ? defaultSize : '"' + defaultSize + '"'};
 
 ${componentStr}
 }
@@ -54,6 +61,7 @@ ${componentStr}
 export interface ${componentName}Props {
     size?: number | string;
     className?: string;
+    color?: string;
 }
 
 declare const ${componentName}: (props: ${componentName}Props) => SVGElement;
@@ -119,6 +127,8 @@ ${components
     })
     .join("\n")}
 
+export const names = [${components.map((v) => '"' + v.id + '"')}];
+
 export default function IconFont({ name, size, className } = {}) {
     switch (name) {
 ${components
@@ -129,7 +139,7 @@ ${components
     })
     .join("\n")}
         default:
-            throw new Error(\`IconFont\'s name must one of ${JSON.stringify(components.map((v) => v.id))} but got "\${name}"\`)
+            throw new Error(\`IconFont\'s name must one of \${JSON.stringify(names)} but got "\${props.name}"\`)
     }
 }`;
     }
@@ -139,6 +149,7 @@ function generateIndexComponentDeclaration(components: Component[]) {
     return `${header}
 
 export type IconFontName = ${components.map((v) => `'${v.id}'`).join(" | ")};
+export declare var names: Array<string>;
 
 ${components
     .map((v) => {
@@ -152,7 +163,7 @@ ${components
     })
     .join("\n")}
 
-interface IconFontProps {
+export interface IconFontProps {
     name: IconFontName;
     size?: number | string;
     className?: string;

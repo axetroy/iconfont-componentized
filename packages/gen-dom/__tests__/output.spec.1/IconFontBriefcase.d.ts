@@ -3,6 +3,7 @@
 export interface IconFontBriefcaseProps {
     size?: number | string;
     className?: string;
+    color?: string;
 }
 
 declare const IconFontBriefcase: (props: IconFontBriefcaseProps) => SVGElement;

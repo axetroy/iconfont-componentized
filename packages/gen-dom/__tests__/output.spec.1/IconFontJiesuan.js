@@ -1,6 +1,6 @@
 // generate by iconfont-componentized
 
-export default function IconFontJiesuan(props) {
+export default function IconFontJiesuan(props = {}) {
     const classNameParts = ['icon-font', 'icon-font-jiesuan'];
 
     if (props.className) {
@@ -9,13 +9,16 @@ export default function IconFontJiesuan(props) {
 
     const classNames = classNameParts.join(' ');
 
+    const size = props.size ?? 32;
+
     var namespace = "http://www.w3.org/2000/svg";
     var ele0 = document.createElementNS(namespace, "svg");
     ele0.setAttribute("viewBox", "0 0 1024 1024");
     ele0.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    ele0.setAttribute("width", props.size ?? "32");
-    ele0.setAttribute("height", props.size ?? "32");
-    ele0.setAttribute("class", classNames);
+    (size) !== undefined && (size) !== null && ele0.setAttribute("width", size);
+    (size) !== undefined && (size) !== null && ele0.setAttribute("height", size);
+    (classNames) !== undefined && (classNames) !== null && ele0.setAttribute("class", classNames);
+    (props.color) !== undefined && (props.color) !== null && ele0.setAttribute("fill", props.color);
 
         var ele1 = document.createElementNS(namespace, "path");
         ele1.setAttribute("d", "M383 873.4c-28.8 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C435.4 850 411.8 873.4 383 873.4L383 873.4zM383 873.4");

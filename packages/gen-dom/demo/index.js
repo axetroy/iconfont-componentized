@@ -5,11 +5,11 @@ import IconFontJia from "../__tests__/output.spec.1/IconFontJia.js";
 import IconFontJiesuan from "../__tests__/output.spec.1/IconFontJiesuan.js";
 import IconFont from "../__tests__/output.spec.1/index.js";
 
-document.body.appendChild(IconFontAnonymousIconfont());
-document.body.appendChild(IconFontBriefcase());
-document.body.appendChild(IconFontCanjuYongcan());
-document.body.appendChild(IconFontJia());
-document.body.appendChild(IconFontJiesuan());
+document.body.appendChild(IconFontAnonymousIconfont({ size: 16 }));
+document.body.appendChild(IconFontBriefcase({ size: 32 }));
+document.body.appendChild(IconFontCanjuYongcan({ size: 48 }));
+document.body.appendChild(IconFontJia({ size: 64 }));
+document.body.appendChild(IconFontJiesuan({ size: 96, className: "test-font", color: "red" }));
 
 document.body.appendChild(IconFont({ name: "anonymous-iconfont" }));
 document.body.appendChild(IconFont({ name: "briefcase" }));

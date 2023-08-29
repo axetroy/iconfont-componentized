@@ -29,11 +29,11 @@ export function generateSvgDOM(node: SvgNode, indent: number, props: Property[])
 
         function renderProperty(prop: Property) {
             if (prop.type === "spread") {
-                return `${indentSpace}Object.keys(${prop.value}).forEach((key) => ${elementName}.setAttribute(key, ${prop.value}[key]));`;
+                return `${indentSpace}Object.keys(${prop.value}).forEach((key) => ${prop.value}[key] !== undefined && ${prop.value}[key] !== null && ${elementName}.setAttribute(key, ${prop.value}[key]));`;
             }
 
             if (prop.type === "variable") {
-                return `${indentSpace}${elementName}.setAttribute("${prop.key}", ${prop.value});`;
+                return `${indentSpace}(${prop.value}) !== undefined && (${prop.value}) !== null && ${elementName}.setAttribute("${prop.key}", ${prop.value});`;
             }
 
             return `${indentSpace}${elementName}.setAttribute("${prop.key}", ${JSON.stringify(prop.value)});`;
