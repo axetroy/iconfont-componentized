@@ -14,13 +14,13 @@ export { IconFontCanjuYongcan };
 
 export const names = ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"];
 
-export default function IconFont({ name, size, className } = {}) {
+export default function IconFont(props = {}) {
     switch (name) {
-        case 'jia': return IconFontJia({ size, className });
-        case 'briefcase': return IconFontBriefcase({ size, className });
-        case 'anonymous-iconfont': return IconFontAnonymousIconfont({ size, className });
-        case 'jiesuan': return IconFontJiesuan({ size, className });
-        case 'canju-yongcan': return IconFontCanjuYongcan({ size, className });
+        case 'jia': return IconFontJia(props);
+        case 'briefcase': return IconFontBriefcase(props);
+        case 'anonymous-iconfont': return IconFontAnonymousIconfont(props);
+        case 'jiesuan': return IconFontJiesuan(props);
+        case 'canju-yongcan': return IconFontCanjuYongcan(props);
         default:
             throw new Error(`IconFont's name must one of ${JSON.stringify(names)} but got "${props.name}"`)
     }

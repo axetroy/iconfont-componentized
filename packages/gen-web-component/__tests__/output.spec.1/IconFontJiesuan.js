@@ -59,10 +59,10 @@ export default class IconFontJiesuan extends HTMLElement {
             var ele0 = document.createElementNS(namespace, "svg");
             ele0.setAttribute("viewBox", "0 0 1024 1024");
             ele0.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-            ele0.setAttribute("width", props.size);
-            ele0.setAttribute("height", props.size);
-            Object.keys(attrsMap).forEach((key) => ele0.setAttribute(key, attrsMap[key]));
-            ele0.setAttribute("class", props.classNames);
+            (props.size) !== undefined && (props.size) !== null && ele0.setAttribute("width", props.size);
+            (props.size) !== undefined && (props.size) !== null && ele0.setAttribute("height", props.size);
+            Object.keys(attrsMap).forEach((key) => attrsMap[key] !== undefined && attrsMap[key] !== null && ele0.setAttribute(key, attrsMap[key]));
+            (props.classNames) !== undefined && (props.classNames) !== null && ele0.setAttribute("class", props.classNames);
 
                 var ele1 = document.createElementNS(namespace, "path");
                 ele1.setAttribute("d", "M383 873.4c-28.8 0-52.4-23.6-52.4-52.4 0-28.8 23.6-52.4 52.4-52.4 29 0 52.4 23.6 52.4 52.4C435.4 850 411.8 873.4 383 873.4L383 873.4zM383 873.4");
