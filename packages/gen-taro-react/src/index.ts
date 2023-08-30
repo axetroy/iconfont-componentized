@@ -115,22 +115,6 @@ export default ${componentName};
     generates(icons: Icon[]): Component[] {
         const components = icons.map((v) => this.generate(v));
 
-        // generate share file
-        components.push({
-            id: "share",
-            componentName: "share",
-            files: [
-                {
-                    filepath: "share.js",
-                    content: fs.readFileSync(path.join(__dirname, "share", "share.js"), { encoding: "utf-8" }),
-                },
-                {
-                    filepath: "share.d.ts",
-                    content: fs.readFileSync(path.join(__dirname, "share", "share.d.ts"), { encoding: "utf-8" }),
-                },
-            ],
-        });
-
         // generate index file
         components.push({
             id: "index",
@@ -143,6 +127,22 @@ export default ${componentName};
                 {
                     filepath: "index.d.ts",
                     content: this.generateIndexComponentDeclaration(components),
+                },
+            ],
+        });
+
+        // generate share file
+        components.push({
+            id: "share",
+            componentName: "share",
+            files: [
+                {
+                    filepath: "share.js",
+                    content: fs.readFileSync(path.join(__dirname, "share", "share.js"), { encoding: "utf-8" }),
+                },
+                {
+                    filepath: "share.d.ts",
+                    content: fs.readFileSync(path.join(__dirname, "share", "share.d.ts"), { encoding: "utf-8" }),
                 },
             ],
         });
