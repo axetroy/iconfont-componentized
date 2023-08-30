@@ -1,6 +1,6 @@
 {
     "name": "@iconfont-componentized/share",
-    "version": "0.2.11",
+    "version": "0.2.12",
     "main": "dist/index.js",
     "repository": "https://github.com/axetroy/iconfont-componentized",
     "license": "ANTI-996",

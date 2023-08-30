@@ -1,5 +1,14 @@
 # @iconfont-componentized/gen-vue
 
+## 0.2.12
+
+### Patch Changes
+
+-   8d6e00f: bump
+-   Updated dependencies [8d6e00f]
+    -   @iconfont-componentized/parser@0.2.12
+    -   @iconfont-componentized/share@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes
