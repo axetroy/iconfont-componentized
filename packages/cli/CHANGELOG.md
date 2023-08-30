@@ -1,5 +1,20 @@
 # @iconfont-componentized/cli
 
+## 0.2.12
+
+### Patch Changes
+
+-   8d6e00f: bump
+-   Updated dependencies [8d6e00f]
+    -   @iconfont-componentized/gen-dom@0.2.12
+    -   @iconfont-componentized/gen-react@0.2.12
+    -   @iconfont-componentized/gen-svg@0.2.12
+    -   @iconfont-componentized/gen-taro-react@0.2.12
+    -   @iconfont-componentized/gen-vue@0.2.12
+    -   @iconfont-componentized/gen-web-component@0.2.12
+    -   @iconfont-componentized/parser@0.2.12
+    -   @iconfont-componentized/share@0.2.12
+
 ## 0.2.11
 
 ### Patch Changes
