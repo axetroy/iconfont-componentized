@@ -51,7 +51,7 @@ export async function parseFromURL(url: string): Promise<Icon[]> {
             };
 
             icons.push({
-                id: child.attributes.id.replace(/^icon(font)?\-{0,}(.+)/, (_, __, $2) => $2),
+                id: child.attributes.id.replace(/^icon(font)?[-_]{0,}(.+)/, (_, __, $2) => $2),
                 node: {
                     ...svgNode,
                     children: child.children,
