@@ -11,7 +11,7 @@ import path from "path";
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
 
-const argv = yargs(hideBin(process.argv)).argv;
+const argv = yargs(hideBin(process.argv)).help(false).version(false).argv;
 
 function printHelp(exitCode: number = 0) {
     process.stderr.write(`Usage: iconfont-componentized-cli [options]
@@ -60,7 +60,7 @@ function getGenerator(target: string, config: Config) {
             break;
         case "taro-react":
             gen = new TaroReactComponentGenerator(DiskWriter, config);
-            break
+            break;
         case "vue":
             gen = new VueComponentGenerator(DiskWriter, config);
             break;
