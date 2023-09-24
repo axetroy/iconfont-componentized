@@ -1,5 +1,14 @@
 # @iconfont-componentized/gen-web-component
 
+## 0.2.13
+
+### Patch Changes
+
+-   269c76c: bump
+-   Updated dependencies [269c76c]
+    -   @iconfont-componentized/parser@0.2.13
+    -   @iconfont-componentized/share@0.2.13
+
 ## 0.2.12
 
 ### Patch Changes
