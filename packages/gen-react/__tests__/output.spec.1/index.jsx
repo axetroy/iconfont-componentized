@@ -2,27 +2,33 @@
 
 import React, { memo } from 'react';
 
-import IconFontJia from "./IconFontJia";
+import IconFontGengduo from "./IconFontGengduo";
+import IconFontIconfontchevronright from "./IconFontIconfontchevronright";
 import IconFontBriefcase from "./IconFontBriefcase";
+import IconFontCanjuYongcan from "./IconFontCanjuYongcan";
+import IconFontJia from "./IconFontJia";
 import IconFontAnonymousIconfont from "./IconFontAnonymousIconfont";
 import IconFontJiesuan from "./IconFontJiesuan";
-import IconFontCanjuYongcan from "./IconFontCanjuYongcan";
 
-export { IconFontJia };
+export { IconFontGengduo };
+export { IconFontIconfontchevronright };
 export { IconFontBriefcase };
+export { IconFontCanjuYongcan };
+export { IconFontJia };
 export { IconFontAnonymousIconfont };
 export { IconFontJiesuan };
-export { IconFontCanjuYongcan };
 
-export const names = ["jia","briefcase","anonymous-iconfont","jiesuan","canju-yongcan"];
+export const names = ["gengduo","iconfontchevronright","briefcase","canju-yongcan","jia","anonymous-iconfont","jiesuan"];
 
 function IconFont(props) {
     switch (props.name) {
-        case 'jia': return <IconFontJia {...props} />;
+        case 'gengduo': return <IconFontGengduo {...props} />;
+        case 'iconfontchevronright': return <IconFontIconfontchevronright {...props} />;
         case 'briefcase': return <IconFontBriefcase {...props} />;
+        case 'canju-yongcan': return <IconFontCanjuYongcan {...props} />;
+        case 'jia': return <IconFontJia {...props} />;
         case 'anonymous-iconfont': return <IconFontAnonymousIconfont {...props} />;
         case 'jiesuan': return <IconFontJiesuan {...props} />;
-        case 'canju-yongcan': return <IconFontCanjuYongcan {...props} />;
         default:
             throw new Error(`IconFont's name must one of ${JSON.stringify(names)} but got "${props.name}"`)
     }

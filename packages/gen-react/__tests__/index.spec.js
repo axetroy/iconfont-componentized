@@ -5,7 +5,7 @@ import path from "path";
 
 describe("generate react", () => {
     it("generate react 1", async () => {
-        await new TaroReactComponentGenerator(DiskWriter, DEFAULT_CONFIG).write("https://at.alicdn.com/t/font_caopq7l9o8t1emi.js", {
+        await new TaroReactComponentGenerator(DiskWriter, DEFAULT_CONFIG).write("//at.alicdn.com/t/c/font_298888_fto194kdmti.js", {
             outputDir: path.join(__dirname, "output.spec.1"),
         });
     });
