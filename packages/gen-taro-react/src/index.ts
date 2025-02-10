@@ -23,7 +23,7 @@ import React, { memo, useMemo, useEffect } from 'react';
 import Taro from '@tarojs/taro'
 import { Image } from '@tarojs/components';
 
-import { svgToBase64, generateSvgJSX } from './share';
+import { svgToBase64, generateSvgJSX } from './share.js';
 
 let node;
 let referenceCount = 0;

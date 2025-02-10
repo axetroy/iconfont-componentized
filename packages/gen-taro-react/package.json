@@ -14,7 +14,7 @@
         "test": "jest",
         "test:ci": "jest --ci --silent --coverage false",
         "dev": "tsc -w",
-        "build": "tsc",
+        "build": "tsc -p tsconfig.json && tsc -p tsconfig.share.json",
         "serve": "vite serve"
     },
     "devDependencies": {

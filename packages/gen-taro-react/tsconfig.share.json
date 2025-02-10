@@ -2,13 +2,12 @@
     "extends": "../../tsconfig.root.json",
     "compilerOptions": {
         "target": "ES2017",
-        "module": "commonjs",
+        "module": "ES2015",
         "outDir": "dist",
         "sourceMap": true,
         "esModuleInterop": true,
         "rootDir": "./src",
         "types": ["node"]
     },
-    "include": ["./src"],
-    "exclude": ["./src/share"]
+    "include": ["./src/share"],
 }
