@@ -1,6 +1,6 @@
 {
     "name": "@iconfont-componentized/gen-taro-react",
-    "version": "0.2.13",
+    "version": "0.2.14",
     "main": "dist/index.js",
     "repository": "https://github.com/axetroy/iconfont-componentized",
     "license": "ANTI-996",
